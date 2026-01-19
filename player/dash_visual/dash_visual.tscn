@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://1onmyypwb4lc"]
+
+[ext_resource type="Script" uid="uid://cdyt1ub6ugh1p" path="res://player/dash_visual/dash_visual.gd" id="1_jqkfr"]
+[ext_resource type="Texture2D" uid="uid://bunv6qvs0sn7r" path="res://assets/male_hero-dash.png" id="2_ansnh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_toahm"]
+atlas = ExtResource("2_ansnh")
+
+[node name="DashVisual" type="Node2D"]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+script = ExtResource("1_jqkfr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_toahm")
+hframes = 5
+frame = 1

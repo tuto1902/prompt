@@ -1,0 +1,4 @@
+extends Node
+
+enum ENTER_SIDE { LEFT, RIGTH, TOP, BOTTOM }
+enum FADE_DIRECTION { LEFT, RIGHT, UP, DOWN }
