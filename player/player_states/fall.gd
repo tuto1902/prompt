@@ -8,6 +8,8 @@ var coyote_timer: float
 var jump_buffer_timer: float
 
 func enter() -> void:
+	if player.previous_state != jump:
+		player.jump_count += 1
 	player.animation_player.play("fall")
 	coyote_timer = player.coyote_time
 
@@ -18,6 +20,12 @@ func exit() -> void:
 func handle_input(event: InputEvent) -> PlayerState:
 	if event.is_action_pressed("jump"):
 		if coyote_timer > 0 and player.previous_state != jump:
+			# Refund a jump since the player jump within the coyote frames
+			# without going lower than zero
+			player.jump_count -= 1
+			player.jump_count = max(player.jump_count, 0)
+			return jump
+		if player.jump_count < player.allowed_jumps:
 			return jump
 		jump_buffer_timer = player.jump_buffer_time
 	return self
@@ -37,7 +45,7 @@ func physics_process(delta: float) -> PlayerState:
 			return jump
 		return idle
 	
-	if player.is_on_wall_only():
+	if player.is_on_wall():
 		return wall_slide
 	
 	

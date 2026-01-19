@@ -13,6 +13,7 @@ var visual_spawn_timer: float
 var dash_speed
 
 func enter() -> void:
+	player.animation_player.play("dash")
 	dash_speed = player.speed * player.dash_speed_multiplier
 	dash_timer = player.dash_time
 	visual_spawn_timer = 0.0
@@ -20,7 +21,6 @@ func enter() -> void:
 
 
 func exit() -> void:
-	player.animation_player.play("dash")
 	dash_timer = 0.0
 	player.dash_cooldown.start(player.dash_cooldown_time)
 

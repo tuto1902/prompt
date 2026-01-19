@@ -1,20 +1,49 @@
 class_name Player extends CharacterBody2D
 
+@export_category('Jump')
+## The height in pixels of a fully held jump
 @export var jump_height: float = 96
+## The time in miliseconds to reach the peak of a fully held jump
 @export var jump_time_to_peak: float = 0.4
+## The distance in pixels covered in one jump
 @export var jump_distance: float = 68
+## The amount of extra gravity applied whebn jump button is released early
 @export var jump_cut_multiplier: float = 0.5
+## Allowed number of jumps before landing
+@export var allowed_jumps: float = 2
+
+@export_category('Gravity')
+## Amount of extra gravity added to the base fall gravity
 @export var fall_gravity_multiplier: float = 1.16
+## Maximum amount of extra gravity that can be added to the base fall gravity
 @export var max_fall_gravity_multiplier: float = 2.8
+## Amount of reduced gravity while sliding on a wall
 @export var max_wall_slide_gravity_multiplier: float = 0.050
+
+@export_category('Jump Feel')
+## Allowed time in miliseconds to perform a jump after falling 
 @export var coyote_time: float = 0.09
+## Allowed time in miliseconds to perform a jump before landing
 @export var jump_buffer_time: float = 0.1
+
+@export_category('Wall Jump')
+## Time in miliseconds before regaining control after a wall jump
 @export var wall_jump_time: float = 0.2
+## Time it takes in miliseconds to release the wall slide
 @export var wall_release_time: float = 0.3
+## Reduced amount of horizontal speed applied after releaseing a wall slide
+## Required to move the player slightly away from the wall and avoid
+## triggering the wall slide again 
 @export var wall_release_speed_multiplier: float = 0.5
+
+@export_category('Dash')
+## Speed added to the base player speed while dashing
 @export var dash_speed_multiplier: float = 3.2
+## Time of the dash in miliseconds
 @export var dash_time: float = 0.3
+## Dash trail spawn interval
 @export var dash_visual_spawn_time: float = 0.02
+## Dash cooldown time in miliseconds
 @export var dash_cooldown_time: float = 0.3
 
 @onready var player_states: Node = %PlayerStates
@@ -46,6 +75,7 @@ var facing_direction: float:
 var is_looking_down: bool
 var jump_velocity: float
 var jump_gravity: float
+var jump_count: float
 var fall_gravity: float
 var max_fall_gravity: float
 var max_wall_slide_gravity: float
@@ -55,6 +85,7 @@ func _ready() -> void:
 	speed = jump_distance / jump_time_to_peak
 	jump_velocity = -(2.0 * jump_height) / jump_time_to_peak
 	jump_gravity = (2.0 * jump_height) / pow(jump_time_to_peak, 2)
+	jump_count = 0
 	fall_gravity = jump_gravity * fall_gravity_multiplier
 	max_fall_gravity = jump_gravity * max_fall_gravity_multiplier
 	max_wall_slide_gravity = jump_gravity * max_wall_slide_gravity_multiplier
@@ -78,9 +109,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle dash
 	if Input.is_action_just_pressed("dash") and dash_cooldown.time_left == 0:
+		if not is_on_wall_only():
 		# Optional: only dash while on the floor
 		# if is_on_floor():
-		transition_to_state(dash)
+			transition_to_state(dash)
 
 	move_and_slide()
 

@@ -9,6 +9,7 @@ var wall_release_timer: float
 var wall_release_speed: float
 
 func enter() -> void:
+	player.jump_count = 0
 	wall_release_speed = player.speed * player.wall_release_speed_multiplier
 	player.animation_player.play("wall_slide")
 	player.sprite.offset.x = -4
@@ -45,10 +46,9 @@ func process(delta: float) -> PlayerState:
 
 
 func physics_process(_delta: float) -> PlayerState:
-	if not player.is_on_wall_only():
+	if not player.is_on_wall():
 		if player.is_on_floor():
 			return idle
-		
 		return fall
 	
 	player.velocity.y = player.max_wall_slide_gravity

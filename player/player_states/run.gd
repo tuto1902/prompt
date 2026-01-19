@@ -9,10 +9,16 @@ func enter() -> void:
 	player.animation_player.play("run")
 
 
+func exit() -> void:
+	if player.animation_player.animation_finished.is_connected(_on_animation_finished):
+		player.animation_player.animation_finished.disconnect(_on_animation_finished)
+
+
 func handle_input(event: InputEvent) -> PlayerState:
 	if event.is_action_pressed("jump") and player.is_on_floor():
 		return jump
 	return self
+
 
 func process(_delta: float) -> PlayerState:
 	player.update_direction()
@@ -20,6 +26,11 @@ func process(_delta: float) -> PlayerState:
 	if player.direction == 0:
 		return idle
 	return self
+
+
+func _on_animation_finished(animation_name: String) -> void:
+	if animation_name == "run_turn":
+		player.animation_player.play("run")
 
 
 func physics_process(_delta: float) -> PlayerState:

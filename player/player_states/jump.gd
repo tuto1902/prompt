@@ -4,6 +4,10 @@ class_name PlayerStateJump extends PlayerState
 
 
 func enter() -> void:
+	if player.jump_count >= player.allowed_jumps:
+		player.transition_to_state(player.previous_state)
+		return
+	player.jump_count += 1
 	player.velocity.y = player.jump_velocity
 	player.animation_player.play("jump")
 

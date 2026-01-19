@@ -11,6 +11,8 @@ modulate = Color(18.892157, 18.892157, 18.892157, 1)
 script = ExtResource("1_jqkfr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 19
+position = Vector2(0, -16)
 texture = SubResource("AtlasTexture_toahm")
 hframes = 5
 frame = 1

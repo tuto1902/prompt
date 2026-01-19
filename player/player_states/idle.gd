@@ -6,10 +6,22 @@ class_name PlayerStateIdle extends PlayerState
 
 
 func enter() -> void:
+	player.jump_count = 0
+	if player.previous_state == run:
+		player.animation_player.play("run_to_idle")
+		player.animation_player.animation_finished.connect(_on_animation_finished)
+		return
 	player.animation_player.play("idle")
 
+
+func _on_animation_finished(animation_name: String) -> void:
+	if animation_name == "run_to_idle":
+		player.animation_player.play("idle")
+
+
 func exit() -> void:
-	pass
+	if player.animation_player.animation_finished.is_connected(_on_animation_finished):
+		player.animation_player.animation_finished.disconnect(_on_animation_finished)
 
 
 func handle_input(event: InputEvent) -> PlayerState:
