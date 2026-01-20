@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://hv3a1kxrcnqv"]
+
+[ext_resource type="Texture2D" uid="uid://n8hvyjkjaa66" path="res://assets/eye_white.png" id="1_roqhq"]
+[ext_resource type="Script" uid="uid://cixhthjfa6p11" path="res://beholder/beholder.gd" id="1_ya767"]
+[ext_resource type="Texture2D" uid="uid://nxninf0eykx4" path="res://assets/eye_iris.png" id="2_ya767"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ya767"]
+radius = 206.0097
+
+[node name="Beholder" type="Node2D"]
+script = ExtResource("1_ya767")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+texture = ExtResource("1_roqhq")
+
+[node name="Pivot" type="Node2D" parent="Sprite2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/Pivot"]
+texture = ExtResource("2_ya767")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_ya767")
