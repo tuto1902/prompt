@@ -21,15 +21,15 @@ class_name Player extends CharacterBody2D
 @export var max_wall_slide_gravity_multiplier: float = 0.050
 
 @export_category('Jump Feel')
-## Allowed time in miliseconds to perform a jump after falling 
+## Allowed time in seconds to perform a jump after falling 
 @export var coyote_time: float = 0.09
-## Allowed time in miliseconds to perform a jump before landing
+## Allowed time in seconds to perform a jump before landing
 @export var jump_buffer_time: float = 0.1
 
 @export_category('Wall Jump')
-## Time in miliseconds before regaining control after a wall jump
+## Time in seconds before regaining control after a wall jump
 @export var wall_jump_time: float = 0.2
-## Time it takes in miliseconds to release the wall slide
+## Time it takes in seconds to release the wall slide
 @export var wall_release_time: float = 0.3
 ## Reduced amount of horizontal speed applied after releaseing a wall slide
 ## Required to move the player slightly away from the wall and avoid
@@ -39,8 +39,10 @@ class_name Player extends CharacterBody2D
 @export_category('Dash')
 ## Speed added to the base player speed while dashing
 @export var dash_speed_multiplier: float = 3.2
-## Time of the dash in miliseconds
+## Time of the dash in seconds
 @export var dash_time: float = 0.3
+## Time of the upward dash in seconds
+@export var up_dash_time: float = 0.6
 ## Dash trail spawn interval
 @export var dash_visual_spawn_time: float = 0.02
 ## Dash cooldown time in miliseconds
@@ -57,6 +59,7 @@ class_name Player extends CharacterBody2D
 @onready var jump: PlayerStateJump = %Jump
 @onready var dash: Node = %Dash
 @onready var pickup_anchor: Marker2D = %PickupAnchor
+@onready var eye_line: Marker2D = $Sprite2D/EyeLine
 
 
 var states: Array[PlayerState]

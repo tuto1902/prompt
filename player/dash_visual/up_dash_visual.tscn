@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxjiy2fo6qabo"]
+
+[ext_resource type="Script" uid="uid://b8kcjtjyhka28" path="res://player/dash_visual/up_dash_visual.gd" id="1_j7un0"]
+[ext_resource type="Texture2D" uid="uid://73dwcns5p02v" path="res://assets/male_hero-death.png" id="2_co2n6"]
+
+[node name="UpDashVisual" type="Node2D"]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+script = ExtResource("1_j7un0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_co2n6")
+hframes = 23
+frame = 7

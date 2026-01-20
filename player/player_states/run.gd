@@ -3,6 +3,7 @@ class_name PlayerStateRun extends PlayerState
 @onready var idle: PlayerStateIdle = %Idle
 @onready var fall: PlayerStateFall = %Fall
 @onready var jump: PlayerStateJump = %Jump
+@onready var up_dash: PlayerStateUpDash = %UpDash
 
 
 func enter() -> void:
@@ -17,6 +18,8 @@ func exit() -> void:
 func handle_input(event: InputEvent) -> PlayerState:
 	if event.is_action_pressed("jump") and player.is_on_floor():
 		return jump
+	if event.is_action_pressed("ability") and player.is_on_floor():
+		return up_dash
 	return self
 
 

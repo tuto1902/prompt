@@ -1,4 +1,4 @@
-extends PlayerState
+class_name PlayerStateDash extends PlayerState
 
 const dash_visual_spawn_interval: float = 0.06
 
@@ -17,7 +17,7 @@ func enter() -> void:
 	dash_speed = player.speed * player.dash_speed_multiplier
 	dash_timer = player.dash_time
 	visual_spawn_timer = 0.0
-	pass
+
 
 
 func exit() -> void:
