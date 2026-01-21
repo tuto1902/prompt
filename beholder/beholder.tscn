@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://nxninf0eykx4" path="res://assets/eye_iris.png" id="2_ya767"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ya767"]
-radius = 206.0097
+radius = 359.00558
 
 [node name="Beholder" type="Node2D"]
 script = ExtResource("1_ya767")

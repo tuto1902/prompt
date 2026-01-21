@@ -8,6 +8,7 @@ modulate = Color(18.892157, 18.892157, 18.892157, 1)
 script = ExtResource("1_j7un0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 19
 position = Vector2(0, -16)
 texture = ExtResource("2_co2n6")
 hframes = 23

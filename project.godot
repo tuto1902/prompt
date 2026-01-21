@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Enums="*res://_global/enums.gd"
 SaveManager="*res://_global/save_manager.gd"
 SceneManager="*res://_global/scene_manager.tscn"
+Audio="*res://_global/audio.tscn"
 
 [display]
 

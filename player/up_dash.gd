@@ -54,6 +54,9 @@ func physics_process(_delta: float) -> PlayerState:
 	player.velocity.y = -dash_speed
 	player.velocity.x = 0
 	
+	if player.is_on_ceiling():
+		return fall
+	
 	return self
 
 
