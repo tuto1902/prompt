@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1nhqwts7nk2p"]
+
+[ext_resource type="Script" uid="uid://b8sjx615cto4y" path="res://player/player_spawn/player_spawn.gd" id="1_su61o"]
+[ext_resource type="Texture2D" uid="uid://b0aiwqm4ul67d" path="res://assets/male_hero-idle.png" id="2_02rtw"]
+
+[node name="PlayerSpawn" type="Node2D"]
+script = ExtResource("1_su61o")
+player_scene = "uid://cyhhb83y3llyw"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1.0800694, 0.18206675, 0.93644583, 1)
+position = Vector2(0, -16)
+texture = ExtResource("2_02rtw")
+hframes = 10
