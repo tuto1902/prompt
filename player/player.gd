@@ -96,6 +96,10 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact"):
+		MessageBus.player_interacted.emit(self)
+		get_viewport().set_input_as_handled()
+	
 	transition_to_state(current_state.handle_input(event))
 	if event is InputEventKey:
 		if event.keycode == KEY_R:

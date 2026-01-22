@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cgs7qyhxv8hvf"]
+[gd_scene load_steps=19 format=4 uid="uid://cgs7qyhxv8hvf"]
 
 [ext_resource type="Texture2D" uid="uid://dyk6ihwc8oyc2" path="res://assets/background/night/1.png" id="1_32tev"]
 [ext_resource type="Script" uid="uid://bbvq5evlplfk3" path="res://scripts/level_bounds.gd" id="1_deul2"]
@@ -8,9 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://c0enwpg5ptu3v" path="res://music/qbit-hub-wip.mp3" id="2_n26bd"]
 [ext_resource type="PackedScene" uid="uid://c1nhqwts7nk2p" path="res://player/player_spawn/player_spawn.tscn" id="3_grqkm"]
 [ext_resource type="Texture2D" uid="uid://c5jlw7i0pgcbd" path="res://assets/background/night/3.png" id="3_qnirs"]
-[ext_resource type="Texture2D" uid="uid://d31lbfh0waiue" path="res://assets/decorations/18.png" id="4_l2ckj"]
-[ext_resource type="Texture2D" uid="uid://clfk6vjxt3qwy" path="res://assets/decorations/20.png" id="5_pbsy4"]
-[ext_resource type="Texture2D" uid="uid://cfbtx0wy5p8f4" path="res://assets/decorations/8.png" id="6_urxio"]
 [ext_resource type="Texture2D" uid="uid://dp1cpqq1cy21k" path="res://assets/decorations/1.png" id="7_vgojc"]
 [ext_resource type="Texture2D" uid="uid://l0m5c6l75e2j" path="res://assets/decorations/12.png" id="8_32tev"]
 [ext_resource type="Texture2D" uid="uid://b1ol18d7d4swx" path="res://assets/decorations/7.png" id="9_1wddp"]
@@ -18,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c72bh7ikay45t" path="res://levels/level_transition/level_transition.tscn" id="11_5qw31"]
 [ext_resource type="Texture2D" uid="uid://pymxmxvoqpoo" path="res://assets/objects/power lines/2.png" id="15_n26bd"]
 [ext_resource type="Texture2D" uid="uid://jhxkwuadg2i3" path="res://assets/objects/power lines/1.png" id="16_6wgd8"]
+[ext_resource type="PackedScene" uid="uid://dtm3lpfwyctx2" path="res://computer/computer.tscn" id="17_32tev"]
 [ext_resource type="Texture2D" uid="uid://b4s8tiv4o5w0r" path="res://assets/objects/power lines/4.png" id="17_qu5jm"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_2xixf"]
@@ -88,24 +86,9 @@ tile_set = ExtResource("2_5qw31")
 z_index = 5
 position = Vector2(256, 190)
 
-[node name="Desk" type="Sprite2D" parent="."]
-z_index = 5
-position = Vector2(298.5, 182.5)
-texture = ExtResource("4_l2ckj")
-
-[node name="Monitor" type="Sprite2D" parent="."]
-z_index = 5
-position = Vector2(303.5, 163.5)
-texture = ExtResource("5_pbsy4")
-
-[node name="Chair" type="Sprite2D" parent="."]
-z_index = 5
-position = Vector2(276.5, 178.5)
-texture = ExtResource("6_urxio")
-
 [node name="Bookshelf" type="Sprite2D" parent="."]
 z_index = 5
-position = Vector2(301.5, 143.5)
+position = Vector2(302, 128)
 texture = ExtResource("7_vgojc")
 
 [node name="CCTV" type="Sprite2D" parent="."]
@@ -148,3 +131,6 @@ z_index = 5
 position = Vector2(524, 250)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("17_qu5jm")
+
+[node name="Computer" parent="." instance=ExtResource("17_32tev")]
+position = Vector2(293, 190)
