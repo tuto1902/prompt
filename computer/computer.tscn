@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtm3lpfwyctx2"]
+
+[ext_resource type="Script" uid="uid://btxcldpcsmj3t" path="res://computer/computer.gd" id="1_678jo"]
+[ext_resource type="Texture2D" uid="uid://d31lbfh0waiue" path="res://assets/decorations/18.png" id="2_tor1g"]
+[ext_resource type="Texture2D" uid="uid://clfk6vjxt3qwy" path="res://assets/decorations/20.png" id="3_wwkpl"]
+[ext_resource type="Texture2D" uid="uid://cfbtx0wy5p8f4" path="res://assets/decorations/8.png" id="4_1kucm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxth2"]
+size = Vector2(67, 47)
+
+[node name="Computer" type="Node2D"]
+z_index = 5
+script = ExtResource("1_678jo")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-5.5, -23.5)
+shape = SubResource("RectangleShape2D_oxth2")
+
+[node name="Desk" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(3.5, -8)
+texture = ExtResource("2_tor1g")
+
+[node name="Monitor" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(8.5, -27)
+texture = ExtResource("3_wwkpl")
+
+[node name="Chair" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(-18.5, -12)
+texture = ExtResource("4_1kucm")

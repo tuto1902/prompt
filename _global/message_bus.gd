@@ -1,0 +1,22 @@
+extends Node
+
+@warning_ignore("unused_signal")
+signal player_ready
+
+@warning_ignore("unused_signal")
+signal player_interacted(player: Player)
+
+@warning_ignore("unused_signal")
+signal player_healed(amount: float)
+
+@warning_ignore("unused_signal")
+signal input_hint_changed(action: String, hint: String)
+
+@warning_ignore("unused_signal")
+signal player_heath_changed(health: float, max_health: float)
+
+@warning_ignore("unused_signal")
+signal game_paused
+
+@warning_ignore("unused_signal")
+signal game_exited
