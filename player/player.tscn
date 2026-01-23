@@ -242,6 +242,7 @@ size = Vector2(16, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 20
+scale = Vector2(0.5, 0.5)
 collision_layer = 16
 safe_margin = 0.14
 script = ExtResource("1_yw30f")

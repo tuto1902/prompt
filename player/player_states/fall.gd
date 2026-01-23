@@ -46,7 +46,8 @@ func physics_process(delta: float) -> PlayerState:
 		return idle
 	
 	if player.is_on_wall():
-		return wall_slide
+		if player.abilities["wall jump"]:
+			return wall_slide
 	
 	
 	

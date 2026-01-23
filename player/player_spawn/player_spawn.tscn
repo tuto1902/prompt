@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b0aiwqm4ul67d" path="res://assets/male_hero-idle.png" id="2_02rtw"]
 
 [node name="PlayerSpawn" type="Node2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_su61o")
 player_scene = "uid://cyhhb83y3llyw"
 

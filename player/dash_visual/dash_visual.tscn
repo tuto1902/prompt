@@ -8,6 +8,7 @@ atlas = ExtResource("2_ansnh")
 
 [node name="DashVisual" type="Node2D"]
 modulate = Color(18.892157, 18.892157, 18.892157, 1)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_jqkfr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

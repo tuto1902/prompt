@@ -1,6 +1,6 @@
 class_name PlayerStateUpDash extends PlayerState
 
-const dash_visual_spawn_interval: float = 0.03
+const dash_visual_spawn_interval: float = 0.02
 
 @onready var idle: PlayerStateIdle = %Idle
 @onready var wall_slide: PlayerStateWallSlide = %WallSlide
@@ -44,7 +44,7 @@ func process(delta: float) -> PlayerState:
 		visual_spawn_timer = 0.0
 		var dash_visual = dash_visual_scene.instantiate() as UpDashVisual
 		dash_visual.global_position = player.global_position
-		dash_visual.scale.x = player.facing_direction
+		dash_visual.scale.x = player.facing_direction * 0.5
 		get_tree().root.add_child(dash_visual)
 	
 	return self

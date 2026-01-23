@@ -1,12 +1,19 @@
 class_name Player extends CharacterBody2D
 
+var abilities: Dictionary = {
+	"double jump": true,
+	"wall jump": true,
+	"dash": true,
+	"upward dash": true
+}
+
 @export_category('Jump')
 ## The height in pixels of a fully held jump
-@export var jump_height: float = 96
+@export var jump_height: float = 48
 ## The time in miliseconds to reach the peak of a fully held jump
-@export var jump_time_to_peak: float = 0.4
+@export var jump_time_to_peak: float = 0.3
 ## The distance in pixels covered in one jump
-@export var jump_distance: float = 68
+@export var jump_distance: float = 34
 ## The amount of extra gravity applied whebn jump button is released early
 @export var jump_cut_multiplier: float = 0.5
 ## Allowed number of jumps before landing
@@ -14,21 +21,21 @@ class_name Player extends CharacterBody2D
 
 @export_category('Gravity')
 ## Amount of extra gravity added to the base fall gravity
-@export var fall_gravity_multiplier: float = 1.16
+@export var fall_gravity_multiplier: float = 1.04
 ## Maximum amount of extra gravity that can be added to the base fall gravity
-@export var max_fall_gravity_multiplier: float = 2.8
+@export var max_fall_gravity_multiplier: float = 1.1
 ## Amount of reduced gravity while sliding on a wall
 @export var max_wall_slide_gravity_multiplier: float = 0.050
 
 @export_category('Jump Feel')
 ## Allowed time in seconds to perform a jump after falling 
-@export var coyote_time: float = 0.09
+@export var coyote_time: float = 0.06
 ## Allowed time in seconds to perform a jump before landing
 @export var jump_buffer_time: float = 0.1
 
 @export_category('Wall Jump')
 ## Time in seconds before regaining control after a wall jump
-@export var wall_jump_time: float = 0.2
+@export var wall_jump_time: float = 0.15
 ## Time it takes in seconds to release the wall slide
 @export var wall_release_time: float = 0.3
 ## Reduced amount of horizontal speed applied after releaseing a wall slide
@@ -38,13 +45,13 @@ class_name Player extends CharacterBody2D
 
 @export_category('Dash')
 ## Speed added to the base player speed while dashing
-@export var dash_speed_multiplier: float = 3.2
+@export var dash_speed_multiplier: float = 2.6
 ## Time of the dash in seconds
 @export var dash_time: float = 0.3
 ## Time of the upward dash in seconds
-@export var up_dash_time: float = 0.6
+@export var up_dash_time: float = 0.4
 ## Dash trail spawn interval
-@export var dash_visual_spawn_time: float = 0.02
+@export var dash_visual_spawn_time: float = 0.01
 ## Dash cooldown time in miliseconds
 @export var dash_cooldown_time: float = 0.3
 
@@ -57,7 +64,7 @@ class_name Player extends CharacterBody2D
 @onready var dash_cooldown: Timer = %DashCooldown
 
 @onready var jump: PlayerStateJump = %Jump
-@onready var dash: Node = %Dash
+@onready var dash: PlayerStateDash = %Dash
 @onready var pickup_anchor: Marker2D = %PickupAnchor
 @onready var eye_line: Marker2D = $Sprite2D/EyeLine
 
@@ -92,7 +99,23 @@ func _ready() -> void:
 	fall_gravity = jump_gravity * fall_gravity_multiplier
 	max_fall_gravity = jump_gravity * max_fall_gravity_multiplier
 	max_wall_slide_gravity = jump_gravity * max_wall_slide_gravity_multiplier
+	MessageBus.player_ability_unlocked.connect(_on_ability_unlocked)
+	MessageBus.player_ability_locked.connect(_on_ability_locked)
 	initialize_states()
+
+
+func _on_ability_unlocked(ability: String) -> void:
+	if abilities.has(ability):
+		abilities[ability] = true
+	if ability == "double jump":
+		allowed_jumps = 2
+
+
+func _on_ability_locked(ability: String) -> void:
+	if abilities.has(ability):
+		abilities[ability] = false
+	if ability == "double jump":
+		allowed_jumps = 1
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -104,23 +127,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.keycode == KEY_R:
 			get_tree().reload_current_scene()
+	
+	# Handle dash
+	if Input.is_action_just_pressed("dash") and dash_cooldown.time_left == 0:
+		if abilities["dash"]:
+			if not is_on_wall_only():
+			# Optional: only dash while on the floor
+			# if is_on_floor():
+				transition_to_state(dash)
 
 
 func _process(delta: float) -> void:
 	transition_to_state(current_state.process(delta))
-	
 
 
 func _physics_process(delta: float) -> void:
 	transition_to_state(current_state.physics_process(delta))
-	
-	# Handle dash
-	if Input.is_action_just_pressed("dash") and dash_cooldown.time_left == 0:
-		if not is_on_wall_only():
-		# Optional: only dash while on the floor
-		# if is_on_floor():
-			transition_to_state(dash)
-
 	move_and_slide()
 
 

@@ -1,6 +1,6 @@
 extends Node
 
-const default_start_scene_uid: String = "uid://clwyc1ur08f73" # Playground
+const default_start_scene_uid: String = "uid://faf3rgagi7tt" # Playground
 const SLOTS: Array[String] = [
 	"data_0",
 ]
@@ -30,6 +30,7 @@ func save_game(slot: int = -1) -> void:
 		"scene_path": scene_uid,
 		"x": player.global_position.x,
 		"y": player.global_position.y,
+		"abilities": player.abilities
 	}
 	var save_file = FileAccess.open(get_file_name(current_slot), FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))
@@ -55,6 +56,7 @@ func setup_player() -> void:
 	
 	player.global_position.x = save_data.get("x", 96)
 	player.global_position.y = save_data.get("y", 352)
+	player.abilities = save_data.get("abilities", {"double jump": false, "wall jump": false, "dash": false, "upward dash": false})
 	
 
 
@@ -65,6 +67,12 @@ func create_new_game_save(slot: int) -> SaveManager:
 		"scene_path": new_game_scene,
 		"x": 96,
 		"y": 352,
+		"abilities": {
+			"double jump": false,
+			"wall jump": false,
+			"dash": false,
+			"upward dash": false
+		}
 	}
 	var save_file = FileAccess.open(get_file_name(current_slot), FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))

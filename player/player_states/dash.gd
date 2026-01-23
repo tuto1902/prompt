@@ -1,6 +1,6 @@
 class_name PlayerStateDash extends PlayerState
 
-const dash_visual_spawn_interval: float = 0.06
+const dash_visual_spawn_interval: float = 0.03
 
 @onready var idle: PlayerStateIdle = %Idle
 @onready var wall_slide: PlayerStateWallSlide = %WallSlide
@@ -38,7 +38,7 @@ func process(delta: float) -> PlayerState:
 		visual_spawn_timer = 0.0
 		var dash_visual = dash_visual_scene.instantiate() as DashVisual
 		dash_visual.global_position = player.global_position
-		dash_visual.scale.x = player.facing_direction
+		dash_visual.scale.x = player.facing_direction * 0.5
 		get_tree().root.add_child(dash_visual)
 	
 	return self
@@ -49,7 +49,8 @@ func physics_process(_delta: float) -> PlayerState:
 	player.velocity.y = 0
 	
 	if player.is_on_wall_only():
-		return wall_slide
+		if player.abilities["wall jump"]:
+			return wall_slide
 	
 	if player.is_on_wall():
 		if player.is_on_floor():
