@@ -19,7 +19,8 @@ func handle_input(event: InputEvent) -> PlayerState:
 	if event.is_action_pressed("jump") and player.is_on_floor():
 		return jump
 	if event.is_action_pressed("ability") and player.is_on_floor():
-		return up_dash
+		if player.abilities["upward dash"]:
+			return up_dash
 	return self
 
 
