@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://cyhhb83y3llyw"]
+[gd_scene load_steps=29 format=3 uid="uid://cyhhb83y3llyw"]
 
 [ext_resource type="Texture2D" uid="uid://gajk7gy5bqcg" path="res://assets/male_hero.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://3yeymuabg5wp" path="res://player/player.gd" id="1_yw30f"]
+[ext_resource type="Texture2D" uid="uid://beqoigo2xkgj5" path="res://assets/qbit_frame.png" id="2_ebec5"]
 [ext_resource type="Script" uid="uid://dmj4ugw4gras" path="res://player/player_states/idle.gd" id="3_qjkh3"]
 [ext_resource type="Script" uid="uid://b6qsjf0cf8igd" path="res://player/player_states/run.gd" id="4_g6k8r"]
 [ext_resource type="Script" uid="uid://bar08vod07yfd" path="res://player/player_states/jump.gd" id="5_g6k8r"]
@@ -12,8 +13,8 @@
 [ext_resource type="Script" uid="uid://bs26yf1yr4alc" path="res://player/up_dash.gd" id="10_8t03j"]
 [ext_resource type="PackedScene" uid="uid://drqcvrd6x5tkm" path="res://input_hint/input_hint.tscn" id="11_2ieo8"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8t03j"]
-size = Vector2(20, 31)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebec5"]
+radius = 5.0
 
 [sub_resource type="Animation" id="Animation_yw30f"]
 length = 0.001
@@ -238,16 +239,20 @@ size = Vector2(1, 28)
 size = Vector2(1, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hg6s5"]
-size = Vector2(16, 1)
+size = Vector2(6, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 20
-scale = Vector2(0.5, 0.5)
 collision_layer = 16
 safe_margin = 0.14
 script = ExtResource("1_yw30f")
 
+[node name="Qbit" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("2_ebec5")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -16)
 texture = ExtResource("1_oul6g")
 hframes = 23
@@ -261,8 +266,9 @@ unique_name_in_owner = true
 position = Vector2(2, -9)
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
+show_behind_parent = true
 position = Vector2(0, -15.5)
-shape = SubResource("RectangleShape2D_8t03j")
+shape = SubResource("CapsuleShape2D_ebec5")
 debug_color = Color(0, 0.6, 0.69803923, 0.12156863)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -282,14 +288,15 @@ position_smoothing_enabled = true
 
 [node name="ShapeCastWallRight" type="ShapeCast2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(9, -15)
+show_behind_parent = true
+position = Vector2(5, -15)
 shape = SubResource("RectangleShape2D_boad6")
 target_position = Vector2(3, 0)
 max_results = 3
 
 [node name="ShapeCastWallLeft" type="ShapeCast2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-9, -15)
+position = Vector2(-5, -15)
 shape = SubResource("RectangleShape2D_rgyib")
 target_position = Vector2(-3, 0)
 max_results = 3

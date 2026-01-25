@@ -38,7 +38,7 @@ func process(delta: float) -> PlayerState:
 		visual_spawn_timer = 0.0
 		var dash_visual = dash_visual_scene.instantiate() as DashVisual
 		dash_visual.global_position = player.global_position
-		dash_visual.scale.x = player.facing_direction * 0.5
+		dash_visual.scale.x = player.facing_direction
 		get_tree().root.add_child(dash_visual)
 	
 	return self
