@@ -57,6 +57,7 @@ var abilities: Dictionary = {
 
 @onready var player_states: Node = %PlayerStates
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var qbit: Sprite2D = $Qbit
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var shape_cast_wall_right: ShapeCast2D = %ShapeCastWallRight
 @onready var shape_cast_wall_left: ShapeCast2D = %ShapeCastWallLeft
@@ -154,8 +155,10 @@ func update_direction() -> void:
 func flip_sprite() -> void:
 	if direction > 0:
 		sprite.scale.x = 1.0
+		qbit.scale.x = 1.0
 	elif direction < 0:
 		sprite.scale.x = -1.0
+		qbit.scale.x = -1.0
 
 
 func initialize_states() -> void:

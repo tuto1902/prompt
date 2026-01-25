@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://x0ga60oaff68"]
+
+[ext_resource type="Script" uid="uid://cixhthjfa6p11" path="res://beholder/beholder.gd" id="1_1d7nj"]
+[ext_resource type="Texture2D" uid="uid://ghcqpkhgsuh2" path="res://assets/eye_small.png" id="2_lp2b5"]
+
+[node name="EyeSmall" type="Node2D"]
+script = ExtResource("1_1d7nj")
+max_distance = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lp2b5")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Pivot" type="Node2D" parent="Sprite2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/Pivot"]
+texture = ExtResource("2_lp2b5")
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)
