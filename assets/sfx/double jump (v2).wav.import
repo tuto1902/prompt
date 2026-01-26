@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d0273st5sjfkq"
+path="res://.godot/imported/double jump (v2).wav-028ac6713692c0fcf10134bbde2da2a9.sample"
+
+[deps]
+
+source_file="res://assets/sfx/double jump (v2).wav"
+dest_files=["res://.godot/imported/double jump (v2).wav-028ac6713692c0fcf10134bbde2da2a9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

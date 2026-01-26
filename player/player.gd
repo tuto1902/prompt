@@ -23,13 +23,13 @@ var abilities: Dictionary = {
 ## Amount of extra gravity added to the base fall gravity
 @export var fall_gravity_multiplier: float = 1.04
 ## Maximum amount of extra gravity that can be added to the base fall gravity
-@export var max_fall_gravity_multiplier: float = 1.1
+@export var max_fall_gravity_multiplier: float = 0.6
 ## Amount of reduced gravity while sliding on a wall
 @export var max_wall_slide_gravity_multiplier: float = 0.050
 
 @export_category('Jump Feel')
 ## Allowed time in seconds to perform a jump after falling 
-@export var coyote_time: float = 0.06
+@export var coyote_time: float = 0.16
 ## Allowed time in seconds to perform a jump before landing
 @export var jump_buffer_time: float = 0.1
 
@@ -67,7 +67,9 @@ var abilities: Dictionary = {
 @onready var jump: PlayerStateJump = %Jump
 @onready var dash: PlayerStateDash = %Dash
 @onready var pickup_anchor: Marker2D = %PickupAnchor
-@onready var eye_line: Marker2D = $Sprite2D/EyeLine
+@onready var eye_line: Marker2D = %EyeLine
+@onready var sfx_player: AudioStreamPlayer = $SFXPlayer
+
 
 
 var states: Array[PlayerState]

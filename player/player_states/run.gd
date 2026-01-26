@@ -5,8 +5,11 @@ class_name PlayerStateRun extends PlayerState
 @onready var jump: PlayerStateJump = %Jump
 @onready var up_dash: PlayerStateUpDash = %UpDash
 
+@export var footsteps_sound: AudioStream
+
 
 func enter() -> void:
+	player.sfx_player.stream = footsteps_sound
 	player.animation_player.play("run")
 
 
@@ -30,6 +33,13 @@ func process(_delta: float) -> PlayerState:
 	if player.direction == 0:
 		return idle
 	return self
+
+
+func play_footstep_sound() -> void:
+	randomize()
+	var pitch_scale = randf_range(0.8, 1.2)
+	player.sfx_player.pitch_scale = pitch_scale
+	player.sfx_player.play()
 
 
 func _on_animation_finished(animation_name: String) -> void:

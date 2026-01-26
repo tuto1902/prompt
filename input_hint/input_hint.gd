@@ -32,13 +32,13 @@ var current_verb: String = ""
 
 
 func _ready() -> void:
-	MessageBus.input_hint_changed.connect(_on_input_hint_changed)
+	pass
 
 
 func _on_input_hint_changed(action: String, hint: String) -> void:
 	current_hint = hint
 	current_verb = action
-	toggle_hint()
+	show_hint()
 
 
 func _input(event: InputEvent) -> void:
@@ -57,15 +57,15 @@ func update_input_texture() -> void:
 	input_texture.texture.region = HINT_MAP[controller_type][current_hint]
 
 
-func toggle_hint() -> void:
-	if current_hint == "":
-		animation_player.play("hide_hint")
-		return
-	
+func show_hint() -> void:
 	verb_label.text = current_verb
 	hint_label.text = current_hint
 	update_input_texture()
 	animation_player.play("show_hint")
+
+
+func hide_hint() -> void:
+	animation_player.play("hide_hint")
 
 
 func get_controller_type(device_id: int) -> String:

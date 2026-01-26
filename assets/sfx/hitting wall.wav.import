@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://do2gkl2hdmj12"
+path="res://.godot/imported/hitting wall.wav-8b12197fcf92a3ca10a87402e8aba7ae.sample"
+
+[deps]
+
+source_file="res://assets/sfx/hitting wall.wav"
+dest_files=["res://.godot/imported/hitting wall.wav-8b12197fcf92a3ca10a87402e8aba7ae.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
