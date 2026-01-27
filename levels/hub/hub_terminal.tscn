@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8n04wdvij2i7"]
+
+[ext_resource type="Script" uid="uid://bqmfi0fj48x8y" path="res://levels/hub/hub_terminal.gd" id="1_71xa5"]
+[ext_resource type="PackedScene" uid="uid://drqcvrd6x5tkm" path="res://input_hint/input_hint.tscn" id="2_lvh7s"]
+[ext_resource type="AudioStream" uid="uid://b0yhptj0xmufx" path="res://assets/sfx/correct item (funky).wav" id="2_od6wh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_od6wh"]
+size = Vector2(32, 33)
+
+[node name="HubTerminal" type="Node2D"]
+script = ExtResource("1_71xa5")
+prompt_delivered_sound = ExtResource("2_od6wh")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(6, -16)
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_od6wh")
+
+[node name="InputHint" parent="." instance=ExtResource("2_lvh7s")]
+position = Vector2(-18, -37)

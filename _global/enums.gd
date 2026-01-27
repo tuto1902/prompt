@@ -2,3 +2,11 @@ extends Node
 
 enum ENTER_SIDE { LEFT, RIGTH, TOP, BOTTOM }
 enum FADE_DIRECTION { LEFT, RIGHT, UP, DOWN }
+
+enum TERMINALS {
+	COLLAPSING_STATION_01
+}
+
+enum DOORS {
+	HUB_DOOR
+}

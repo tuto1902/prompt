@@ -1,1 +1,13 @@
-Hello World!
+if {GameManager.current_level} == 1.0:
+	if {GameManager.responses_delivered} == 0.0:
+		if {GameManager.player_has_response} == false:
+			anderson: What is your name?
+			qubit: I need to get the response
+			do GameManager.prompt_requested()
+			do GameManager.open_door(Enums.DOORS.HUB_DOOR)
+		else:
+			do GameManager.response_delivered()
+			do GameManager.close_door(Enums.DOORS.HUB_DOOR)
+			qubit: Hello, my name is Qubit!
+			qubit: I am here to help with all your questions.
+			qubit: What would you like to know

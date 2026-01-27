@@ -1,0 +1,59 @@
+[gd_scene load_steps=12 format=4 uid="uid://b28w77vt64l63"]
+
+[ext_resource type="Script" uid="uid://pyxhmyfse3u7" path="res://scripts/music_auto_play.gd" id="1_hc650"]
+[ext_resource type="Texture2D" uid="uid://c8omcg4pguemm" path="res://assets/hub.png" id="1_vjyq5"]
+[ext_resource type="TileSet" uid="uid://3b43rsfi6g3k" path="res://tilesets/prototype_tileset.tres" id="2_omfrw"]
+[ext_resource type="AudioStream" uid="uid://xfbw1vaslie5" path="res://music/qubit-gameplay.wav" id="2_peekt"]
+[ext_resource type="Script" uid="uid://bbvq5evlplfk3" path="res://scripts/level_bounds.gd" id="3_hc650"]
+[ext_resource type="PackedScene" uid="uid://c1nhqwts7nk2p" path="res://player/player_spawn/player_spawn.tscn" id="4_peekt"]
+[ext_resource type="PackedScene" uid="uid://c72bh7ikay45t" path="res://levels/level_transition/level_transition.tscn" id="5_ro0uo"]
+[ext_resource type="Script" uid="uid://bsxqjk0jb1dmb" path="res://levels/hub/hub_door.gd" id="8_peekt"]
+[ext_resource type="PackedScene" uid="uid://b8n04wdvij2i7" path="res://levels/hub/hub_terminal.tscn" id="9_ro0uo"]
+[ext_resource type="PackedScene" uid="uid://bdepwk1b30tvg" path="res://levels/door/door.tscn" id="10_4k5b7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4k5b7"]
+size = Vector2(48, 12)
+
+[node name="Hub" type="Node2D"]
+script = ExtResource("1_hc650")
+music_track = ExtResource("2_peekt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(96, 48)
+texture = ExtResource("1_vjyq5")
+
+[node name="CollisionLayer" type="TileMapLayer" parent="."]
+modulate = Color(1, 1, 1, 0)
+tile_map_data = PackedByteArray("AAAAAAUAAAAEAAAAAAABAAUAAAAEAAAAAAACAAUAAAAEAAAAAAADAAUAAAAEAAAAAAAEAAUAAAAEAAAAAAAFAAUAAAAEAAAAAAAGAAUAAAAEAAAAAAAHAAUAAAAEAAAAAAAIAAUAAAAEAAAAAAAJAAUAAAAEAAAAAAAKAAUAAAAEAAAAAAALAAUAAAAFAAYAAAALAAQAAAAGAAEAAAALAAMAAAAGAAEAAAALAAIAAAAGAAEAAAALAAEAAAAGAAEAAAALAAAAAAAFAAUAAAAKAAAAAAAEAAAAAAAJAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAGAAAAAAAEAAAAAAAHAAAAAAAEAAAAAAAFAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAADAAAAAAAEAAAAAAACAAAAAAAEAAAAAAABAAAAAAAFAAMAAAABAAEAAAACAAIAAAAAAAEAAAAAAAIAAAAAAAAAAAAAAAAAAAD//wUAAAAEAAAAAAD+/wUAAAAEAAYAAAD+/wQAAAAGAAEAAAD+/wMAAAAGAAEAAAD+/wIAAAAGAAAAAAA=")
+tile_set = ExtResource("2_omfrw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(8, 38)
+shape = SubResource("RectangleShape2D_4k5b7")
+
+[node name="LevelBounds" type="Node2D" parent="."]
+z_index = 256
+script = ExtResource("3_hc650")
+metadata/_custom_type_script = "uid://bbvq5evlplfk3"
+
+[node name="PlayerSpawn" parent="." instance=ExtResource("4_peekt")]
+position = Vector2(92, 80)
+
+[node name="CollapsingTrainStation" parent="." instance=ExtResource("5_ro0uo")]
+position = Vector2(0, 80)
+size = 3
+target_scene = "uid://dwdesgjtylakh"
+target_area_name = "Hub"
+
+[node name="HubDoor" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("8_peekt")
+
+[node name="HubTerminal" parent="." instance=ExtResource("9_ro0uo")]
+position = Vector2(154, 80)
+
+[node name="Door" parent="." instance=ExtResource("10_4k5b7")]
+position = Vector2(13, 80)
+requires_switch = false

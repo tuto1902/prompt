@@ -3,6 +3,7 @@ extends Node
 var current_track: AudioStream
 
 @onready var music: AudioStreamPlayer = $Music
+@onready var sfx: AudioStreamPlayer = $SFX
 
 
 func play_music(music_track: AudioStream) -> void:
@@ -26,3 +27,10 @@ func play_music(music_track: AudioStream) -> void:
 	var fade_in_tween = create_tween()
 	fade_in_tween.tween_property(music, "volume_linear", 1.0, 0.4)
 	await  fade_in_tween.finished
+
+
+func play_sound_effect(sound_effect: AudioStream) -> void:
+	if sfx.stream != sound_effect:
+		sfx.stream = sound_effect
+	
+	sfx.play()

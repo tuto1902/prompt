@@ -74,9 +74,14 @@ func _on_new_scene_ready(target_area: String, offset: Vector2, player_direction:
 	if target_area != name:
 		return
 	
-	var player := get_tree().get_first_node_in_group("Player")
+	var player: Player = get_tree().get_first_node_in_group("Player")
 	player.global_position = global_position + offset
 	player.sprite.scale.x = player_direction
+	
+	var pickup: Pickup = get_tree().get_first_node_in_group("Pickup")
+	if pickup:
+		pickup.global_position = player.pickup_anchor.global_position
+		pickup.anchor = player.pickup_anchor
 
 
 func _on_load_scene_finished() -> void:

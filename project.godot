@@ -11,26 +11,69 @@ config_version=5
 [application]
 
 config/name="Prompt"
-run/main_scene="uid://faf3rgagi7tt"
+run/main_scene="uid://b28w77vt64l63"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Enums="*res://_global/enums.gd"
+MessageBus="*res://_global/message_bus.gd"
+GameManager="*res://_global/game_manager.gd"
 SaveManager="*res://_global/save_manager.gd"
 SceneManager="*res://_global/scene_manager.tscn"
 Audio="*res://_global/audio.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
-MessageBus="*res://_global/message_bus.gd"
 
 [dialogic]
 
-directories/dch_directory={}
+directories/dch_directory={
+"anderson": "res://dialog/characters/anderson.dch",
+"qubit": "res://dialog/characters/qubit.dch"
+}
 directories/dtl_directory={
 "chapter_one": "res://dialog/chapter_one.dtl"
 }
-layout/style_directory={}
+layout/style_directory={
+"": "res://dialog/styles/dialog_style.tres",
+"dialog_style": "res://dialog/styles/dialog_style.tres"
+}
+layout/style_list=["res://dialog/styles/dialog_style.tres"]
+layout/default_style="res://dialog/styles/dialog_style.tres"
+extensions_folder="res://addons/dialogic_additions"
+text/letter_speed=0.09
+text/initial_text_reveal_skippable=true
+text/text_reveal_skip_delay=0.1
+text/advance_delay=0.1
+text/autoadvance_per_character_delay=0.1
+text/autoadvance_ignored_characters_enabled=true
+animations/join_default_length=0.5
+animations/join_default_wait=true
+animations/leave_default_length=0.5
+animations/leave_default_wait=true
+animations/cross_fade_default_length=0.5
+choices/autofocus_first=true
+choices/delay=0.2
+choices/reveal_delay=0
+choices/reveal_by_input=false
+save/autosave_delay=60.0
+save/encryption_on_exports_only=true
+text/autopauses={}
+audio/channel_defaults={
+"": {
+"audio_bus": "",
+"fade_length": 0.0,
+"loop": false,
+"volume": 0.0
+},
+"music": {
+"audio_bus": "",
+"fade_length": 0.0,
+"loop": true,
+"volume": 0.0
+}
+}
+variables={}
 
 [display]
 
@@ -43,6 +86,10 @@ window/stretch/mode="canvas_items"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+
+[global_group]
+
+Pickup=""
 
 [gui]
 
@@ -145,3 +192,4 @@ debug={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.32156864, 0.27450982, 0.2901961, 1)

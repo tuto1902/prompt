@@ -1,20 +1,22 @@
-[gd_scene load_steps=29 format=3 uid="uid://cyhhb83y3llyw"]
+[gd_scene load_steps=31 format=3 uid="uid://cyhhb83y3llyw"]
 
 [ext_resource type="Texture2D" uid="uid://gajk7gy5bqcg" path="res://assets/male_hero.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://3yeymuabg5wp" path="res://player/player.gd" id="1_yw30f"]
 [ext_resource type="Texture2D" uid="uid://beqoigo2xkgj5" path="res://assets/qbit_frame.png" id="2_ebec5"]
 [ext_resource type="Script" uid="uid://dmj4ugw4gras" path="res://player/player_states/idle.gd" id="3_qjkh3"]
+[ext_resource type="Script" uid="uid://cq158pthgsoal" path="res://player/pickup_anchor.gd" id="4_ebec5"]
 [ext_resource type="Script" uid="uid://b6qsjf0cf8igd" path="res://player/player_states/run.gd" id="4_g6k8r"]
 [ext_resource type="Script" uid="uid://bar08vod07yfd" path="res://player/player_states/jump.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://1qkioml8ywpu" path="res://player/player_states/fall.gd" id="6_boad6"]
 [ext_resource type="Script" uid="uid://bi4itbbtkiu24" path="res://player/player_states/dash.gd" id="7_boad6"]
 [ext_resource type="Script" uid="uid://b4b42jj6vo1n" path="res://player/player_states/wall_slide.gd" id="7_hg6s5"]
+[ext_resource type="AudioStream" uid="uid://b75gwwyk70hwp" path="res://assets/sfx/running for storage (step).wav" id="7_yllr7"]
 [ext_resource type="Script" uid="uid://caw38gcbsdct" path="res://player/player_states/wall_jump.gd" id="8_8t03j"]
+[ext_resource type="AudioStream" uid="uid://cvpng64tjsug8" path="res://assets/sfx/jump (v2).wav" id="9_kb6p2"]
 [ext_resource type="Script" uid="uid://bs26yf1yr4alc" path="res://player/up_dash.gd" id="10_8t03j"]
-[ext_resource type="PackedScene" uid="uid://drqcvrd6x5tkm" path="res://input_hint/input_hint.tscn" id="11_2ieo8"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ebec5"]
-radius = 5.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebec5"]
+size = Vector2(8, 29)
 
 [sub_resource type="Animation" id="Animation_yw30f"]
 length = 0.001
@@ -116,6 +118,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [138, 139, 140, 141, 142, 143, 144, 145, 146, 147]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerStates/Run")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.083333336, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep_sound"
+}, {
+"args": [],
+"method": &"play_footstep_sound"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_2ieo8"]
@@ -251,6 +270,15 @@ script = ExtResource("1_yw30f")
 position = Vector2(0, -16)
 texture = ExtResource("2_ebec5")
 
+[node name="PickupAnchor" type="Marker2D" parent="Qbit"]
+unique_name_in_owner = true
+position = Vector2(-11, -20)
+script = ExtResource("4_ebec5")
+
+[node name="EyeLine" type="Marker2D" parent="Qbit"]
+unique_name_in_owner = true
+position = Vector2(2, -10)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -16)
@@ -259,16 +287,10 @@ hframes = 23
 vframes = 25
 frame = 23
 
-[node name="PickupAnchor" type="Marker2D" parent="Sprite2D"]
-unique_name_in_owner = true
-
-[node name="EyeLine" type="Marker2D" parent="Sprite2D"]
-position = Vector2(2, -9)
-
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 show_behind_parent = true
-position = Vector2(0, -15.5)
-shape = SubResource("CapsuleShape2D_ebec5")
+position = Vector2(0, -14.5)
+shape = SubResource("RectangleShape2D_ebec5")
 debug_color = Color(0, 0.6, 0.69803923, 0.12156863)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -285,6 +307,7 @@ limit_top = -96
 limit_right = 384
 limit_bottom = 416
 position_smoothing_enabled = true
+position_smoothing_speed = 64.0
 
 [node name="ShapeCastWallRight" type="ShapeCast2D" parent="."]
 unique_name_in_owner = true
@@ -321,10 +344,12 @@ script = ExtResource("3_qjkh3")
 [node name="Run" type="Node" parent="PlayerStates"]
 unique_name_in_owner = true
 script = ExtResource("4_g6k8r")
+footsteps_sound = ExtResource("7_yllr7")
 
 [node name="Jump" type="Node" parent="PlayerStates"]
 unique_name_in_owner = true
 script = ExtResource("5_g6k8r")
+jump_sound = ExtResource("9_kb6p2")
 
 [node name="Fall" type="Node" parent="PlayerStates"]
 unique_name_in_owner = true
@@ -346,5 +371,5 @@ script = ExtResource("7_boad6")
 unique_name_in_owner = true
 script = ExtResource("10_8t03j")
 
-[node name="InputHint" parent="." instance=ExtResource("11_2ieo8")]
-position = Vector2(0, -36)
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr3rwf4iek5as"]
+
+[ext_resource type="Script" uid="uid://bxdq7irkg66sm" path="res://pickups/pickup.gd" id="1_85vh6"]
+[ext_resource type="Texture2D" uid="uid://v5mnli0ylfen" path="res://assets/prompt_response_pink.png" id="1_j6llu"]
+
+[sub_resource type="Animation" id="Animation_3tkis"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_85vh6"]
+resource_name = "float"
+length = 1.0000083
+loop_mode = 2
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(2, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, -2), Vector2(0, 0), Vector2(0, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gwp8d"]
+_data = {
+&"RESET": SubResource("Animation_3tkis"),
+&"float": SubResource("Animation_85vh6")
+}
+
+[node name="PickupPink" type="Node2D" groups=["Pickup"]]
+z_index = 50
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_85vh6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_j6llu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gwp8d")
+}
+autoplay = "float"

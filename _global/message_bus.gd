@@ -19,6 +19,21 @@ signal player_ability_locked(ability: String)
 signal input_hint_changed(action: String, hint: String)
 
 @warning_ignore("unused_signal")
+signal prompt_requested()
+
+@warning_ignore("unused_signal")
+signal prompt_response_collected(terminal_id: Enums.TERMINALS, pickup_scene: String)
+
+@warning_ignore("unused_signal")
+signal prompt_response_delivered()
+
+@warning_ignore("unused_signal")
+signal open_door(door_name: Enums.DOORS)
+
+@warning_ignore("unused_signal")
+signal close_door(door_name: Enums.DOORS)
+
+@warning_ignore("unused_signal")
 signal player_heath_changed(health: float, max_health: float)
 
 @warning_ignore("unused_signal")
