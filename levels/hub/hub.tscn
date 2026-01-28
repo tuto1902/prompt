@@ -41,11 +41,11 @@ metadata/_custom_type_script = "uid://bbvq5evlplfk3"
 [node name="PlayerSpawn" parent="." instance=ExtResource("4_peekt")]
 position = Vector2(92, 80)
 
-[node name="CollapsingTrainStation" parent="." instance=ExtResource("5_ro0uo")]
+[node name="CollapsingTrainStationDoor" parent="." instance=ExtResource("5_ro0uo")]
 position = Vector2(0, 80)
 size = 3
 target_scene = "uid://dwdesgjtylakh"
-target_area_name = "Hub"
+target_area_name = "HubDoor"
 
 [node name="HubDoor" type="Node2D" parent="."]
 unique_name_in_owner = true

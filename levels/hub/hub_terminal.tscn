@@ -1,17 +1,78 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8n04wdvij2i7"]
+[gd_scene load_steps=10 format=3 uid="uid://b8n04wdvij2i7"]
 
 [ext_resource type="Script" uid="uid://bqmfi0fj48x8y" path="res://levels/hub/hub_terminal.gd" id="1_71xa5"]
 [ext_resource type="PackedScene" uid="uid://drqcvrd6x5tkm" path="res://input_hint/input_hint.tscn" id="2_lvh7s"]
 [ext_resource type="AudioStream" uid="uid://b0yhptj0xmufx" path="res://assets/sfx/correct item (funky).wav" id="2_od6wh"]
+[ext_resource type="Texture2D" uid="uid://dvu6iuets04bb" path="res://assets/hub_terminal.png" id="3_od6wh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od6wh"]
 size = Vector2(32, 33)
+
+[sub_resource type="Animation" id="Animation_od6wh"]
+resource_name = "disabled"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_yiv2q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_oy3bq"]
+resource_name = "blinking"
+loop_mode = 1
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ea26x"]
+_data = {
+&"RESET": SubResource("Animation_yiv2q"),
+&"blinking": SubResource("Animation_oy3bq"),
+&"disabled": SubResource("Animation_od6wh")
+}
 
 [node name="HubTerminal" type="Node2D"]
 script = ExtResource("1_71xa5")
 prompt_delivered_sound = ExtResource("2_od6wh")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(13, -24)
+texture = ExtResource("3_od6wh")
+hframes = 2
+
 [node name="Area2D" type="Area2D" parent="."]
+show_behind_parent = true
 position = Vector2(6, -16)
 collision_layer = 8
 collision_mask = 16
@@ -21,3 +82,8 @@ shape = SubResource("RectangleShape2D_od6wh")
 
 [node name="InputHint" parent="." instance=ExtResource("2_lvh7s")]
 position = Vector2(-18, -37)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ea26x")
+}

@@ -9,7 +9,7 @@ var abilities: Dictionary = {
 
 @export_category('Jump')
 ## The height in pixels of a fully held jump
-@export var jump_height: float = 48
+@export var jump_height: float = 54
 ## The time in miliseconds to reach the peak of a fully held jump
 @export var jump_time_to_peak: float = 0.3
 ## The distance in pixels covered in one jump
@@ -66,6 +66,8 @@ var abilities: Dictionary = {
 
 @onready var jump: PlayerStateJump = %Jump
 @onready var dash: PlayerStateDash = %Dash
+@onready var dialog: Node = %Dialog
+@onready var death: PlayerStateDeath = %Death
 @onready var pickup_anchor: Marker2D = %PickupAnchor
 @onready var eye_line: Marker2D = %EyeLine
 @onready var sfx_player: AudioStreamPlayer = $SFXPlayer
@@ -93,6 +95,7 @@ var fall_gravity: float
 var max_fall_gravity: float
 var max_wall_slide_gravity: float
 
+var player_just_jumped: bool = false
 
 func _ready() -> void:
 	speed = jump_distance / jump_time_to_peak
@@ -104,7 +107,16 @@ func _ready() -> void:
 	max_wall_slide_gravity = jump_gravity * max_wall_slide_gravity_multiplier
 	MessageBus.player_ability_unlocked.connect(_on_ability_unlocked)
 	MessageBus.player_ability_locked.connect(_on_ability_locked)
+	Dialogic.signal_event.connect(_on_dialogic_signal)
 	initialize_states()
+
+
+func _on_dialogic_signal(argumet: String) -> void:
+	if argumet == "dialog_started":
+		transition_to_state(dialog)
+		return
+	if argumet == "dialog_ended":
+		transition_to_state(previous_state)
 
 
 func _on_ability_unlocked(ability: String) -> void:
@@ -122,7 +134,7 @@ func _on_ability_locked(ability: String) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact"):
+	if event.is_action_pressed("interact") and current_state != dialog:
 		MessageBus.player_interacted.emit(self)
 		get_viewport().set_input_as_handled()
 	
@@ -163,6 +175,15 @@ func flip_sprite() -> void:
 		qbit.scale.x = -1.0
 
 
+func died() -> void:
+	transition_to_state(death)
+
+
+func death_animation_finished() -> void:
+	queue_free()
+	MessageBus.player_died.emit()
+
+
 func initialize_states() -> void:
 	for state in player_states.get_children():
 		if state is PlayerState:
@@ -171,6 +192,10 @@ func initialize_states() -> void:
 			states.append(state)
 	
 	current_state.enter()
+
+
+func initialize_game_state() -> void:
+	pass
 
 
 func transition_to_state(new_state: PlayerState) -> void:

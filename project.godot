@@ -85,7 +85,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/minimize_html_build/plugin.cfg")
 
 [global_group]
 
@@ -184,8 +184,12 @@ debug={
 [layer_names]
 
 2d_physics/layer_1="Ground"
+2d_physics/layer_2="OneWayPlatform"
+2d_physics/layer_3="MovingPlatform"
 2d_physics/layer_4="Interactable"
 2d_physics/layer_5="Player"
+2d_physics/layer_6="MovingPlatformLimit"
+2d_physics/layer_7="Killbox"
 
 [rendering]
 

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgvq7ma44wjm6"]
+
+[ext_resource type="Script" uid="uid://dx4hhdhmjclki" path="res://platforms/moving_platform.gd" id="1_kcv71"]
+[ext_resource type="Texture2D" uid="uid://cbkuo6t36klmb" path="res://assets/floating_platform.png" id="2_5jun7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ce21s"]
+size = Vector2(26, 4)
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+collision_layer = 4
+collision_mask = 16
+sync_to_physics = false
+script = ExtResource("1_kcv71")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 8)
+texture = ExtResource("2_5jun7")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_ce21s")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(13, 2)
+target_position = Vector2(4, 0)
+collision_mask = 33
+collide_with_areas = true
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-13, 2)
+target_position = Vector2(-4, 0)
+collision_mask = 33
+collide_with_areas = true

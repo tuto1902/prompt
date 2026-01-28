@@ -30,7 +30,14 @@ func save_game(slot: int = -1) -> void:
 		"scene_path": scene_uid,
 		"x": player.global_position.x,
 		"y": player.global_position.y,
-		"abilities": player.abilities
+		"abilities": player.abilities,
+		"pickup_terminals": GameManager.pickup_terminals.values(),
+		"prompts": GameManager.prompts.values(),
+		"doors": GameManager.doors.values(),
+		"prompt_request_active": GameManager.prompt_request_active,
+		"player_has_response": GameManager.player_has_response,
+		"hub_terminal_active": GameManager.hub_terminal_active,
+		"current_terminal": int(GameManager.current_terminal)
 	}
 	var save_file = FileAccess.open(get_file_name(current_slot), FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))
@@ -42,10 +49,33 @@ func load_game(slot: int = -1) -> void:
 		return
 	var save_file = FileAccess.open(get_file_name(current_slot), FileAccess.READ)
 	save_data = JSON.parse_string(save_file.get_line())
+	setup_game()
 	var scene_path: String = save_data.get("scene_path", default_start_scene_uid)
 	SceneManager.transition_to_scene(scene_path, "", Vector2.ZERO, 1, Enums.FADE_DIRECTION.RIGHT)
 	await SceneManager.scene_ready
 	setup_player()
+
+
+func setup_game() -> void:
+	var pickup_terminals: Array = save_data.get("pickup_terminals")
+	var prompts: Array = save_data.get("prompts")
+	var doors: Array = save_data.get("doors")
+	
+	GameManager.prompt_request_active = save_data.get("prompt_request_active", false)
+	GameManager.player_has_response = save_data.get("player_has_response", false)
+	GameManager.hub_terminal_active = save_data.get("hub_terminal_active", true)
+	GameManager.current_terminal = save_data.get("current_terminal") as Enums.TERMINALS
+	
+	if pickup_terminals:
+		for i in pickup_terminals.size():
+			GameManager.pickup_terminals[i] = pickup_terminals[i]
+	if prompts:
+		for i in prompts.size():
+			GameManager.prompts[i] = prompts[i]
+	if doors:
+		for i in doors.size():
+			GameManager.doors[i] = doors[i]
+
 
 
 func setup_player() -> void:
@@ -57,6 +87,9 @@ func setup_player() -> void:
 	player.global_position.x = save_data.get("x", 96)
 	player.global_position.y = save_data.get("y", 352)
 	player.abilities = save_data.get("abilities", {"double jump": false, "wall jump": false, "dash": false, "upward dash": false})
+	if GameManager.player_has_response:
+		GameManager.doors[Enums.DOORS.HUB_DOOR]["is_opened"] = true
+		MessageBus.prompt_response_collected.emit(GameManager.current_terminal, false)
 	
 
 

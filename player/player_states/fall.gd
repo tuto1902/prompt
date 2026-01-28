@@ -1,6 +1,7 @@
 class_name PlayerStateFall extends PlayerState
 
 @onready var idle: PlayerStateIdle = %Idle
+@onready var run: PlayerStateRun = %Run
 @onready var jump: PlayerStateJump = %Jump
 @onready var wall_slide: PlayerStateWallSlide = %WallSlide
 
@@ -8,6 +9,11 @@ var coyote_timer: float
 var jump_buffer_timer: float
 
 func enter() -> void:
+	if player.previous_state == run and player.player_just_jumped == true:
+		# Somehow the floor collision was not detected while running and jumping
+		player.player_just_jumped = false
+		player.transition_to_state(jump)
+		return
 	if player.previous_state != jump:
 		player.jump_count += 1
 	player.animation_player.play("fall")

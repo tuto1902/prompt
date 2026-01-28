@@ -10,6 +10,9 @@ signal player_interacted(player: Player)
 signal player_healed(amount: float)
 
 @warning_ignore("unused_signal")
+signal player_died()
+
+@warning_ignore("unused_signal")
 signal player_ability_unlocked(ability: String)
 
 @warning_ignore("unused_signal")
@@ -22,7 +25,7 @@ signal input_hint_changed(action: String, hint: String)
 signal prompt_requested()
 
 @warning_ignore("unused_signal")
-signal prompt_response_collected(terminal_id: Enums.TERMINALS, pickup_scene: String)
+signal prompt_response_collected(terminal_id: Enums.TERMINALS, save_game: bool)
 
 @warning_ignore("unused_signal")
 signal prompt_response_delivered()

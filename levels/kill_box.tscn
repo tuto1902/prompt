@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://jx7vrdlu70jc"]
+
+[ext_resource type="Script" uid="uid://dit8ts4y0g7iy" path="res://levels/kill_box.gd" id="1_pao2v"]
+
+[node name="KillBox" type="Area2D"]
+collision_layer = 64
+collision_mask = 16
+monitorable = false
+script = ExtResource("1_pao2v")
