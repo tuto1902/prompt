@@ -1,6 +1,6 @@
 extends Node
 
-const default_start_scene_uid: String = "uid://faf3rgagi7tt" # Playground
+const default_start_scene_uid: String = "uid://b28w77vt64l63" # Hub
 const SLOTS: Array[String] = [
 	"data_0",
 ]
@@ -30,10 +30,14 @@ func save_game(slot: int = -1) -> void:
 		"scene_path": scene_uid,
 		"x": player.global_position.x,
 		"y": player.global_position.y,
-		"abilities": player.abilities,
+		"double jump": player.abilities[Enums.ABILITIES.DOUBLE_JUMP],
+		"wall jump":player.abilities[Enums.ABILITIES.WALL_JUMP],
+		"dash": player.abilities[Enums.ABILITIES.DASH],
+		"up dash": player.abilities[Enums.ABILITIES.UP_DASH],
 		"pickup_terminals": GameManager.pickup_terminals.values(),
-		"prompts": GameManager.prompts.values(),
 		"doors": GameManager.doors.values(),
+		"current_level": GameManager.current_level,
+		"responses_delivered": GameManager.responses_delivered,
 		"prompt_request_active": GameManager.prompt_request_active,
 		"player_has_response": GameManager.player_has_response,
 		"hub_terminal_active": GameManager.hub_terminal_active,
@@ -58,20 +62,18 @@ func load_game(slot: int = -1) -> void:
 
 func setup_game() -> void:
 	var pickup_terminals: Array = save_data.get("pickup_terminals")
-	var prompts: Array = save_data.get("prompts")
 	var doors: Array = save_data.get("doors")
 	
 	GameManager.prompt_request_active = save_data.get("prompt_request_active", false)
 	GameManager.player_has_response = save_data.get("player_has_response", false)
 	GameManager.hub_terminal_active = save_data.get("hub_terminal_active", true)
 	GameManager.current_terminal = save_data.get("current_terminal") as Enums.TERMINALS
+	GameManager.current_level = save_data.get("current_level", 0)
+	GameManager.responses_delivered = save_data.get("responses_delivered", 0)
 	
 	if pickup_terminals:
 		for i in pickup_terminals.size():
 			GameManager.pickup_terminals[i] = pickup_terminals[i]
-	if prompts:
-		for i in prompts.size():
-			GameManager.prompts[i] = prompts[i]
 	if doors:
 		for i in doors.size():
 			GameManager.doors[i] = doors[i]
@@ -86,7 +88,12 @@ func setup_player() -> void:
 	
 	player.global_position.x = save_data.get("x", 96)
 	player.global_position.y = save_data.get("y", 352)
-	player.abilities = save_data.get("abilities", {"double jump": false, "wall jump": false, "dash": false, "upward dash": false})
+	player.abilities[Enums.ABILITIES.DOUBLE_JUMP] = save_data.get("double jump", false)
+	if player.abilities[Enums.ABILITIES.DOUBLE_JUMP] == true:
+		player.allowed_jumps = 2
+	player.abilities[Enums.ABILITIES.DASH] = save_data.get("dash", false)
+	player.abilities[Enums.ABILITIES.WALL_JUMP] = save_data.get("wall jump", false)
+	player.abilities[Enums.ABILITIES.UP_DASH] = save_data.get("up dash", false)
 	if GameManager.player_has_response:
 		GameManager.doors[Enums.DOORS.HUB_DOOR]["is_opened"] = true
 		MessageBus.prompt_response_collected.emit(GameManager.current_terminal, false)
@@ -98,14 +105,20 @@ func create_new_game_save(slot: int) -> SaveManager:
 	current_slot = slot
 	save_data = {
 		"scene_path": new_game_scene,
-		"x": 96,
-		"y": 352,
-		"abilities": {
-			"double jump": false,
-			"wall jump": false,
-			"dash": false,
-			"upward dash": false
-		}
+		"x": 92,
+		"y": 80,
+		"double jump": false,
+		"wall jump": false,
+		"dash": false,
+		"up dash": false,
+		"pickup_terminals": GameManager.pickup_terminals.values(),
+		"doors": GameManager.doors.values(),
+		"current_level": GameManager.current_level,
+		"responses_delivered": GameManager.responses_delivered,
+		"prompt_request_active": GameManager.prompt_request_active,
+		"player_has_response": GameManager.player_has_response,
+		"hub_terminal_active": GameManager.hub_terminal_active,
+		"current_terminal": int(GameManager.current_terminal)
 	}
 	var save_file = FileAccess.open(get_file_name(current_slot), FileAccess.WRITE)
 	save_file.store_line(JSON.stringify(save_data))

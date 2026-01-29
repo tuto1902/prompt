@@ -12,7 +12,7 @@ func play_music(music_track: AudioStream) -> void:
 		music.volume_linear = 1.0
 		music.play()
 	
-	if music.stream == music_track:
+	if current_track == music_track:
 		return
 	
 	current_track = music_track

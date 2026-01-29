@@ -13,10 +13,10 @@ signal player_healed(amount: float)
 signal player_died()
 
 @warning_ignore("unused_signal")
-signal player_ability_unlocked(ability: String)
+signal player_ability_unlocked(ability: Enums.ABILITIES)
 
 @warning_ignore("unused_signal")
-signal player_ability_locked(ability: String)
+signal player_ability_locked(ability: Enums.ABILITIES)
 
 @warning_ignore("unused_signal")
 signal input_hint_changed(action: String, hint: String)

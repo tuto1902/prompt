@@ -14,6 +14,8 @@ func _ready() -> void:
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("debug"):
 		var player = get_tree().get_first_node_in_group("Player")
+		if not player:
+			return
 		double_jump_toggle.button_pressed = player.abilities.get("double jump", false)
 		wall_jump_toggle.button_pressed = player.abilities.get("wall jump", false)
 		dash_toggle.button_pressed = player.abilities.get("dash", false)
@@ -34,27 +36,27 @@ func _input(_event: InputEvent) -> void:
 
 func _on_double_jump_toggled(toggle_on: bool) -> void:
 	if toggle_on:
-		MessageBus.player_ability_unlocked.emit("double jump")
+		MessageBus.player_ability_unlocked.emit(Enums.ABILITIES.DOUBLE_JUMP)
 	else:
-		MessageBus.player_ability_locked.emit("double jump")
+		MessageBus.player_ability_locked.emit(Enums.ABILITIES.DOUBLE_JUMP)
 
 
 func _on_wall_jump_toggled(toggle_on: bool) -> void:
 	if toggle_on:
-		MessageBus.player_ability_unlocked.emit("wall jump")
+		MessageBus.player_ability_unlocked.emit(Enums.ABILITIES.WALL_JUMP)
 	else:
-		MessageBus.player_ability_locked.emit("wall jump")
+		MessageBus.player_ability_locked.emit(Enums.ABILITIES.WALL_JUMP)
 
 
 func _on_dash_toggled(toggle_on: bool) -> void:
 	if toggle_on:
-		MessageBus.player_ability_unlocked.emit("dash")
+		MessageBus.player_ability_unlocked.emit(Enums.ABILITIES.DASH)
 	else:
-		MessageBus.player_ability_locked.emit("dash")
+		MessageBus.player_ability_locked.emit(Enums.ABILITIES.DASH)
 
 
 func _on_up_dash_toggled(toggle_on: bool) -> void:
 	if toggle_on:
-		MessageBus.player_ability_unlocked.emit("upward dash")
+		MessageBus.player_ability_unlocked.emit(Enums.ABILITIES.UP_DASH)
 	else:
-		MessageBus.player_ability_locked.emit("upward dash")
+		MessageBus.player_ability_locked.emit(Enums.ABILITIES.UP_DASH)

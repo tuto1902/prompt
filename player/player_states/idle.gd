@@ -8,10 +8,10 @@ class_name PlayerStateIdle extends PlayerState
 
 func enter() -> void:
 	player.jump_count = 0
-	if player.previous_state == run:
-		player.animation_player.play("run_to_idle")
-		player.animation_player.animation_finished.connect(_on_animation_finished)
-		return
+	#if player.previous_state == run:
+		#player.animation_player.play("run_to_idle")
+		#player.animation_player.animation_finished.connect(_on_animation_finished)
+		#return
 	player.animation_player.play("idle")
 
 
@@ -29,12 +29,12 @@ func handle_input(event: InputEvent) -> PlayerState:
 	if event.is_action_pressed("jump") and player.is_on_floor():
 		player.shape_cast_one_way_platform.force_shapecast_update()
 		if player.is_looking_down and player.shape_cast_one_way_platform.is_colliding():
-			player.position.y += 2
-			return self
+			player.position.y += 4
+			return fall
 		return jump
 	
 	if event.is_action_pressed("ability") and player.is_on_floor():
-		if player.abilities["upward dash"]:
+		if player.abilities[Enums.ABILITIES.UP_DASH]:
 			return up_dash
 	return self
 

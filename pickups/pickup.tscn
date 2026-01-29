@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cr3rwf4iek5as"]
 
-[ext_resource type="Script" uid="uid://bxdq7irkg66sm" path="res://pickups/pickup.gd" id="1_85vh6"]
-[ext_resource type="Texture2D" uid="uid://v5mnli0ylfen" path="res://assets/prompt_response_pink.png" id="1_j6llu"]
+[ext_resource type="Script" uid="uid://bxdq7irkg66sm" path="res://pickups/pickup.gd" id="1_0ketk"]
+[ext_resource type="Texture2D" uid="uid://cegmcxaa7miyi" path="res://assets/prompt_response.png" id="2_i5kuo"]
 
 [sub_resource type="Animation" id="Animation_3tkis"]
 length = 0.001
@@ -42,13 +42,14 @@ _data = {
 &"float": SubResource("Animation_85vh6")
 }
 
-[node name="PickupPink" type="Node2D" groups=["Pickup"]]
+[node name="Pickup" type="Node2D" groups=["Pickup"]]
 z_index = 50
 scale = Vector2(0.75, 0.75)
-script = ExtResource("1_85vh6")
+script = ExtResource("1_0ketk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_j6llu")
+texture = ExtResource("2_i5kuo")
+hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

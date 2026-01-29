@@ -1,6 +1,6 @@
 class_name DashVisual extends Node2D
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = $Qbit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

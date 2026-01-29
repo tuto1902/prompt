@@ -12,7 +12,7 @@ func enter() -> void:
 	player.jump_count = 0
 	wall_release_speed = player.speed * player.wall_release_speed_multiplier
 	player.animation_player.play("wall_slide")
-	player.sprite.offset.x = -4
+	player.sprite.offset.x = 3
 	if player.shape_cast_wall_right.is_colliding():
 		player.sprite.scale.x = -1
 		player.direction = -1

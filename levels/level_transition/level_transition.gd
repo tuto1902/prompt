@@ -59,11 +59,11 @@ func _on_player_entered(player: Node2D) -> void:
 			fade_direction = Enums.FADE_DIRECTION.RIGHT
 		Enums.ENTER_SIDE.TOP:
 			offset.x = player.global_position.x - global_position.x
-			offset.y = -16
+			offset.y = -19
 			fade_direction = Enums.FADE_DIRECTION.UP
 		Enums.ENTER_SIDE.BOTTOM:
 			offset.x = player.global_position.x - global_position.x
-			offset.y = 21
+			offset.y = 32
 			fade_direction = Enums.FADE_DIRECTION.DOWN
 	
 	var player_direction: float = player.sprite.scale.x

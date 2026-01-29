@@ -44,4 +44,8 @@ func _on_prompt_response_delivered() -> void:
 func _on_player_interacted(_player: Player) -> void:
 	input_hint.hide_hint()
 	player_interacted = true
+	print("Current level " + str(GameManager.current_level))
+	print("Responses delivered " + str(GameManager.responses_delivered))
+	print("Request active " + str(GameManager.prompt_request_active))
+	print("Player has response " + str(GameManager.player_has_response))
 	Dialogic.start("chapter_one")
