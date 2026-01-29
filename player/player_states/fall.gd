@@ -48,11 +48,14 @@ func process(delta: float) -> PlayerState:
 func physics_process(delta: float) -> PlayerState:
 	if player.is_on_floor():
 		if jump_buffer_timer > 0:
+			# Refund a jump and we have time remaining in the jump
+			# buffer
+			player.jump_count -= 1
 			return jump
 		return idle
 	
 	if player.is_on_wall():
-		if player.abilities["wall jump"]:
+		if player.abilities[Enums.ABILITIES.WALL_JUMP]:
 			return wall_slide
 	
 	

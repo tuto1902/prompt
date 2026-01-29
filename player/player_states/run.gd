@@ -24,7 +24,7 @@ func handle_input(event: InputEvent) -> PlayerState:
 		if player.is_on_floor():
 			return jump
 	if event.is_action_pressed("ability") and player.is_on_floor():
-		if player.abilities["upward dash"]:
+		if player.abilities[Enums.ABILITIES.UP_DASH]:
 			return up_dash
 	return self
 

@@ -593,8 +593,16 @@ texture = ExtResource("1_72fk3")
 0:11/0 = 0
 2:11/0 = 0
 1:11/0 = 0
+6:8/0 = 0
+6:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+6:8/0/physics_layer_0/polygon_0/one_way = true
+6:9/0 = 0
+6:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+6:9/0/physics_layer_0/polygon_0/one_way = true
 
 [resource]
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 16
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Ground 0"
 terrain_set_0/terrain_0/color = Color(0.6244591, 0.14356253, 0.54127103, 1)

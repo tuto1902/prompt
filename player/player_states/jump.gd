@@ -9,7 +9,8 @@ func enter() -> void:
 	player.player_just_jumped = false
 	player.sfx_player.stream = jump_sound
 	player.sfx_player.pitch_scale = 1.0
-	if player.jump_count >= player.allowed_jumps:
+	if player.jump_count > player.allowed_jumps:
+		print("jump count: " + str(player.jump_count))
 		player.transition_to_state(player.previous_state)
 		return
 	player.jump_count += 1

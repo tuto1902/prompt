@@ -1,10 +1,10 @@
 class_name Player extends CharacterBody2D
 
 var abilities: Dictionary = {
-	"double jump": true,
-	"wall jump": true,
-	"dash": true,
-	"upward dash": true
+	Enums.ABILITIES.DOUBLE_JUMP: false,
+	Enums.ABILITIES.DASH: false,
+	Enums.ABILITIES.WALL_JUMP: false,
+	Enums.ABILITIES.UP_DASH: false
 }
 
 @export_category('Jump')
@@ -17,7 +17,7 @@ var abilities: Dictionary = {
 ## The amount of extra gravity applied whebn jump button is released early
 @export var jump_cut_multiplier: float = 0.5
 ## Allowed number of jumps before landing
-@export var allowed_jumps: float = 2
+@export var allowed_jumps: float = 1
 
 @export_category('Gravity')
 ## Amount of extra gravity added to the base fall gravity
@@ -56,7 +56,7 @@ var abilities: Dictionary = {
 @export var dash_cooldown_time: float = 0.3
 
 @onready var player_states: Node = %PlayerStates
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = $Qbit
 @onready var qbit: Sprite2D = $Qbit
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var shape_cast_wall_right: ShapeCast2D = %ShapeCastWallRight
@@ -64,6 +64,7 @@ var abilities: Dictionary = {
 @onready var shape_cast_one_way_platform: ShapeCast2D = %ShapeCastOneWayPlatform
 @onready var dash_cooldown: Timer = %DashCooldown
 
+@onready var idle: PlayerStateIdle = %Idle
 @onready var jump: PlayerStateJump = %Jump
 @onready var dash: PlayerStateDash = %Dash
 @onready var dialog: Node = %Dialog
@@ -116,20 +117,19 @@ func _on_dialogic_signal(argumet: String) -> void:
 		transition_to_state(dialog)
 		return
 	if argumet == "dialog_ended":
-		transition_to_state(previous_state)
+		transition_to_state(idle)
 
 
-func _on_ability_unlocked(ability: String) -> void:
-	if abilities.has(ability):
-		abilities[ability] = true
-	if ability == "double jump":
+func _on_ability_unlocked(ability: Enums.ABILITIES) -> void:
+	abilities[ability] = true
+	if ability == Enums.ABILITIES.DOUBLE_JUMP:
 		allowed_jumps = 2
 
 
-func _on_ability_locked(ability: String) -> void:
+func _on_ability_locked(ability: Enums.ABILITIES) -> void:
 	if abilities.has(ability):
 		abilities[ability] = false
-	if ability == "double jump":
+	if ability == Enums.ABILITIES.DOUBLE_JUMP:
 		allowed_jumps = 1
 
 
@@ -145,7 +145,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	# Handle dash
 	if Input.is_action_just_pressed("dash") and dash_cooldown.time_left == 0:
-		if abilities["dash"]:
+		if abilities[Enums.ABILITIES.DASH]:
 			if not is_on_wall_only():
 			# Optional: only dash while on the floor
 			# if is_on_floor():

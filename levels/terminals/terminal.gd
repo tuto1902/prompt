@@ -23,16 +23,22 @@ func _ready() -> void:
 func _on_player_entered(_player: Node2D) -> void:
 	MessageBus.player_interacted.connect(_on_player_interacted)
 	MessageBus.input_hint_changed.connect(input_hint._on_input_hint_changed)
+	if GameManager.player_has_response:
+		return
 	MessageBus.input_hint_changed.emit("Press","interact")
 
 
 func _on_player_exited(_player: Node2D) -> void:
 	MessageBus.player_interacted.disconnect(_on_player_interacted)
 	MessageBus.input_hint_changed.disconnect(input_hint._on_input_hint_changed)
+	if GameManager.player_has_response:
+		return
 	input_hint.hide_hint()
 
 
 func _on_player_interacted(_player: Player) -> void:
+	if GameManager.player_has_response:
+		return
 	MessageBus.prompt_response_collected.emit(terminal_id, true)
 	Audio.play_sound_effect(pickup_sound)
 	animation_player.play("idle")

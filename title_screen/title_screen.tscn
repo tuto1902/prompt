@@ -1,0 +1,151 @@
+[gd_scene load_steps=4 format=4 uid="uid://dk1h5p6kr3ddo"]
+
+[ext_resource type="Script" uid="uid://cuxm2lpdyb3am" path="res://title_screen/title_screen.gd" id="1_dxpbd"]
+[ext_resource type="TileSet" uid="uid://clsq5rpfu20vi" path="res://tilesets/prompt_tileset.tres" id="2_2dq6q"]
+[ext_resource type="AudioStream" uid="uid://c2lm8axmnyv0d" path="res://music/qubit-title-screen.wav" id="2_vbjqi"]
+
+[node name="TitleScreen" type="CanvasLayer"]
+layer = 50
+script = ExtResource("1_dxpbd")
+music_track = ExtResource("2_vbjqi")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scene" type="Control" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Root/Scene"]
+tile_map_data = PackedByteArray("AAD/////AAADAAcAAAAAAP//AAAEAAcAAAAAAAAAAAABAAEAAAABAAAAAAAAAAUAAAABAAEAAAACAAEAAAAUAAsAAAAFAAkAAAAUAAoAAAACAAEAAAAUAAkAAAACAAEAAAAUAAgAAAACAAEAAAAUAAcAAAACAAEAAAAUAAYAAAACAAEAAAAUAAUAAAACAAgAAAAUAAQAAAACAAgAAAAUAAMAAAACAAEAAAAUAAIAAAACAAgAAAAUAAEAAAACAAEAAAAUAAAAAAAFAAgAAAAUAP//AAACAAAAAAATAAsAAAAEAAkAAAATAAoAAAABAAEAAAATAAkAAAAEAAgAAAATAAgAAAABAAEAAAATAAcAAAABAAEAAAATAAYAAAABAAEAAAATAAUAAAABAAEAAAATAAQAAAABAAEAAAATAAMAAAABAAEAAAATAAIAAAABAAEAAAATAAEAAAABAAEAAAATAAAAAAAEAAgAAAATAP//AAAEAAcAAAASAAsAAAAEAAkAAAASAAoAAAABAAYAAAASAAkAAAADAAgAAAASAAgAAAAAAAEAAAASAAcAAAADAAgAAAASAAYAAAAAAAEAAAASAAUAAAAAAAEAAAASAAQAAAAAAAEAAAASAAMAAAAAAAEAAAASAAIAAAADAAgAAAASAAEAAAADAAgAAAASAAAAAAABAAUAAAASAP//AAABAAAAAAARAAsAAAAEAAkAAAARAAoAAAABAAAAAAARAAAAAAABAAIAAAARAP//AAABAAAAAAAQAAsAAAABAAIAAAAQAAoAAAABAAAAAAAQAAAAAAABAAIAAAAQAP//AAABAAcAAAAPAAsAAAABAAIAAAAPAAoAAAABAAAAAAAPAAAAAAABAAIAAAAPAP//AAABAAAAAAAOAAsAAAAEAAkAAAAOAAoAAAABAAAAAAAOAAAAAAABAAIAAAAOAP//AAABAAAAAAANAAsAAAABAAIAAAANAAoAAAABAAAAAAANAAAAAAABAAkAAAANAP//AAABAAAAAAAMAAsAAAABAAIAAAAMAAoAAAABAAcAAAAMAAAAAAABAAIAAAAMAP//AAABAAAAAAALAAsAAAAEAAkAAAALAAoAAAABAAAAAAALAAAAAAABAAIAAAALAP//AAAEAAcAAAAKAAsAAAABAAIAAAAKAAoAAAABAAAAAAAKAAAAAAABAAIAAAAKAP//AAAEAAcAAAAJAAsAAAABAAIAAAAJAAoAAAABAAAAAAAJAAAAAAABAAIAAAAJAP//AAABAAAAAAAIAAsAAAABAAIAAAAIAAoAAAAEAAcAAAAIAAAAAAABAAIAAAAIAP//AAABAAAAAAAHAAsAAAABAAIAAAAHAAoAAAABAAAAAAAHAAAAAAABAAIAAAAHAP//AAABAAAAAAAGAAsAAAABAAIAAAAGAAoAAAAEAAcAAAAGAAAAAAAEAAkAAAAGAP//AAABAAAAAAAFAAsAAAABAAIAAAAFAAoAAAABAAAAAAAFAAAAAAAEAAkAAAAFAP//AAABAAAAAAAEAAsAAAAEAAkAAAAEAAoAAAABAAAAAAAEAAAAAAABAAIAAAAEAP//AAABAAAAAAADAAsAAAABAAIAAAADAAoAAAABAAAAAAADAAAAAAABAAIAAAADAP//AAABAAAAAAACAAsAAAABAAIAAAACAAoAAAABAAAAAAACAAAAAAABAAkAAAACAP//AAAEAAcAAAABAAsAAAABAAkAAAABAAoAAAAAAAYAAAABAAkAAAACAAEAAAABAAgAAAAFAAgAAAABAAcAAAACAAgAAAABAAYAAAACAAEAAAABAAUAAAACAAEAAAABAAQAAAACAAEAAAABAAMAAAAFAAgAAAABAAIAAAACAAEAAAABAP//AAABAAAAAAAAAAsAAAABAAIAAAAAAAoAAAABAAEAAAAAAAkAAAABAAEAAAAAAAgAAAABAAEAAAAAAAcAAAABAAEAAAAAAAYAAAABAAEAAAAAAAUAAAABAAEAAAAAAAQAAAAEAAgAAAAAAAMAAAABAAEAAAAAAAIAAAABAAEAAAAAAAEAAAABAAEAAAD//wsAAAAAAAIAAAD//woAAAAAAAEAAAD//wkAAAAAAAEAAAD//wgAAAAAAAEAAAD//wcAAAAAAAEAAAD//wYAAAADAAgAAAD//wUAAAAAAAEAAAD//wQAAAAAAAEAAAD//wMAAAAAAAEAAAD//wIAAAAAAAEAAAD//wEAAAAAAAEAAAD//wAAAAAAAAEAAAA=")
+tile_set = ExtResource("2_2dq6q")
+
+[node name="MainMenu" type="VBoxContainer" parent="Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -20.0
+offset_right = 84.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Root/MainMenu"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "[center]>[pulse freq=1.4 color=#ffffff00 ease=-100.0]_[/pulse]prompt[/center]"
+fit_content = true
+
+[node name="NewGameButton" type="Button" parent="Root/MainMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 5
+text = "New Game"
+
+[node name="ContinueButton" type="Button" parent="Root/MainMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 5
+text = "Continue"
+
+[node name="SettingsButton" type="Button" parent="Root/MainMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 5
+text = "Settings"
+
+[node name="ExitButton" type="Button" parent="Root/MainMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 5
+text = "Exit"
+
+[node name="SettingsMenu" type="VBoxContainer" parent="Root"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -20.0
+offset_right = 84.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Root/SettingsMenu"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Audio"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Root/SettingsMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Root/SettingsMenu/HBoxContainer"]
+custom_minimum_size = Vector2(68, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "music"
+
+[node name="MusicVolume" type="HSlider" parent="Root/SettingsMenu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Root/SettingsMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Root/SettingsMenu/HBoxContainer2"]
+custom_minimum_size = Vector2(68, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "sfx"
+
+[node name="SfxVolume" type="HSlider" parent="Root/SettingsMenu/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="BackToMenuButton" type="Button" parent="Root/SettingsMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 5
+text = "Back to menu"
