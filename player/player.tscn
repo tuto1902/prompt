@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cyhhb83y3llyw"]
+[gd_scene load_steps=34 format=3 uid="uid://cyhhb83y3llyw"]
 
 [ext_resource type="Script" uid="uid://3yeymuabg5wp" path="res://player/player.gd" id="1_yw30f"]
 [ext_resource type="Texture2D" uid="uid://btoxkov1t74qq" path="res://assets/qubit_spritesheet.png" id="2_32hag"]
@@ -24,46 +24,22 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Qbit:position")
+tracks/0/path = NodePath("Qbit:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -16)]
+"update": 1,
+"values": [10]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Qbit:modulate")
+tracks/1/path = NodePath("Qbit:frame_coords")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Qbit:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Qbit:frame_coords")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -72,7 +48,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_rgyib"]
 resource_name = "dash"
-length = 0.166675
+length = 0.3333417
+loop_mode = 1
 step = 0.083333336
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -81,65 +58,41 @@ tracks/0/path = NodePath("Qbit:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.083333336),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [31, 32]
+"values": [70, 71, 72, 73]
 }
 
 [sub_resource type="Animation" id="Animation_wodsf"]
 resource_name = "death"
-length = 0.66667503
+length = 1.3333417
 step = 0.083333336
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Qbit:position")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6666667),
-"transitions": PackedFloat32Array(0.5, 2),
-"update": 0,
-"values": [Vector2(0, -16), Vector2(0, -42)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Qbit:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.25, 0.6666667),
-"transitions": PackedFloat32Array(0.5, 2),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(4.415934, 4.415934, 4.415934, 0)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.6666667),
+"times": PackedFloat32Array(1.3333334),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"death_animation_finished"
 }]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Qbit:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Qbit:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25, 0.33333334, 0.4166667, 0.5, 0.5833334, 0.6666667, 0.75, 0.8333334, 0.9166667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [44]
+"values": [84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 97]
 }
 
 [sub_resource type="Animation" id="Animation_boad6"]
@@ -162,7 +115,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_g1dw6"]
 resource_name = "idle"
-length = 0.083341666
+length = 0.8333417
 loop_mode = 1
 step = 0.083333336
 tracks/0/type = "value"
@@ -172,10 +125,10 @@ tracks/0/path = NodePath("Qbit:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [10]
+"values": [98, 99, 100, 101, 102]
 }
 
 [sub_resource type="Animation" id="Animation_g6k8r"]
@@ -318,6 +271,37 @@ tracks/0/keys = {
 "values": [14, 15, 16, 17]
 }
 
+[sub_resource type="Animation" id="Animation_32hag"]
+resource_name = "idle_apple"
+length = 1.2500083
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Qbit:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25, 0.33333334, 0.4166667, 0.5, 0.5833334, 0.6666667, 0.75, 0.8333334, 0.9166667, 1, 1.0833334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerStates/Idle")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_idle_animation"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgyib"]
 _data = {
 &"RESET": SubResource("Animation_yw30f"),
@@ -325,6 +309,7 @@ _data = {
 &"death": SubResource("Animation_wodsf"),
 &"fall": SubResource("Animation_boad6"),
 &"idle": SubResource("Animation_g1dw6"),
+&"idle_apple": SubResource("Animation_32hag"),
 &"jump": SubResource("Animation_g6k8r"),
 &"run": SubResource("Animation_qjkh3"),
 &"run_to_idle": SubResource("Animation_2ieo8"),
@@ -353,7 +338,7 @@ script = ExtResource("1_yw30f")
 position = Vector2(0, -16)
 texture = ExtResource("2_32hag")
 hframes = 14
-vframes = 5
+vframes = 8
 frame = 28
 
 [node name="PickupAnchor" type="Marker2D" parent="Qbit"]

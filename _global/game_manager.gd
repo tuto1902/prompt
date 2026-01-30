@@ -18,6 +18,27 @@ var pickup_terminals: Dictionary = {
 	},
 	Enums.TERMINALS.ABANDONED_RAILWAY_03: {
 		"enabled": false,
+	},
+	Enums.TERMINALS.GARDEN_BUBKER: {
+		"enabled": false,
+	},
+	Enums.TERMINALS.STAION_Z: {
+		"enabled": false,
+	},
+	Enums.TERMINALS.UNFINISHED_APARTMENTS_1: {
+		"enabled": false,
+	},
+	Enums.TERMINALS.RUINED_APARTMENTS_1: {
+		"enabled": false,
+	},
+	Enums.TERMINALS.RUINED_APARTMENTS_2: {
+		"enabled": false,
+	},
+	Enums.TERMINALS.RUINED_APARTMENTS_3: {
+		"enabled": true,
+	},
+	Enums.TERMINALS.COLLAPSING_STATION_02: {
+		"enabled": false,
 	}
 }
 
@@ -51,6 +72,13 @@ func _ready() -> void:
 	#Engine.time_scale = 0.25
 	MessageBus.prompt_response_collected.connect(_on_prompt_response_collected)
 	MessageBus.player_died.connect(_on_player_died)
+	Dialogic.signal_event.connect(_on_dialogic_signal)
+
+
+func _on_dialogic_signal(argumet: String) -> void:
+	if argumet == "game_over":
+		# Title screen
+		SceneManager.transition_to_scene("uid://dk1h5p6kr3ddo", "", Vector2(-999, -999), 1.0, Enums.FADE_DIRECTION.LEFT)
 
 
 func _on_player_died() -> void:
@@ -101,6 +129,14 @@ func response_delivered() -> void:
 			pickup_terminals[Enums.TERMINALS.ABANDONED_RAILWAY_01]["enabled"] = true
 			pickup_terminals[Enums.TERMINALS.ABANDONED_RAILWAY_02]["enabled"] = true
 			pickup_terminals[Enums.TERMINALS.ABANDONED_RAILWAY_03]["enabled"] = true
+		elif current_level == 3:
+			pickup_terminals[Enums.TERMINALS.GARDEN_BUBKER]["enabled"] = true
+			pickup_terminals[Enums.TERMINALS.RUINED_APARTMENTS_1]["enabled"] = true
+			pickup_terminals[Enums.TERMINALS.STAION_Z]["enabled"] = true
+		elif current_level == 4:
+			pickup_terminals[Enums.TERMINALS.COLLAPSING_STATION_02]["enabled"] = true
+			pickup_terminals[Enums.TERMINALS.RUINED_APARTMENTS_2]["enabled"] = true
+			pickup_terminals[Enums.TERMINALS.UNFINISHED_APARTMENTS_1]["enabled"] = true
 	SaveManager.save_game(0)
 
 

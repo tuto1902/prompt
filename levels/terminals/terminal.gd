@@ -37,6 +37,8 @@ func _on_player_exited(_player: Node2D) -> void:
 
 
 func _on_player_interacted(_player: Player) -> void:
+	if terminal_id == Enums.TERMINALS.RUINED_APARTMENTS_3:
+		Dialogic.start("chapter_one")
 	if GameManager.player_has_response:
 		return
 	MessageBus.prompt_response_collected.emit(terminal_id, true)

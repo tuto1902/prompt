@@ -29,7 +29,7 @@ var abilities: Dictionary = {
 
 @export_category('Jump Feel')
 ## Allowed time in seconds to perform a jump after falling 
-@export var coyote_time: float = 0.16
+@export var coyote_time: float = 0.1
 ## Allowed time in seconds to perform a jump before landing
 @export var jump_buffer_time: float = 0.1
 

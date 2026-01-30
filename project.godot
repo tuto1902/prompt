@@ -22,17 +22,24 @@ MessageBus="*res://_global/message_bus.gd"
 GameManager="*res://_global/game_manager.gd"
 SaveManager="*res://_global/save_manager.gd"
 SceneManager="*res://_global/scene_manager.tscn"
+AbilityUnlockedScreen="*res://ability_unlock_screen/abilityUnlockedScreen.tscn"
 Audio="*res://_global/audio.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
 directories/dch_directory={
+"adelina": "res://dialog/characters/adelina.dch",
+"alex": "res://dialog/characters/alex.dch",
+"alexa": "res://dialog/characters/alexa.dch",
 "anderson": "res://dialog/characters/anderson.dch",
+"clair": "res://dialog/characters/clair.dch",
 "felix": "res://dialog/characters/felix.dch",
 "felixcharacter": "res://dialog/characters/felixcharacter.dch",
+"forest": "res://dialog/characters/forest.dch",
 "john": "res://dialog/characters/john.dch",
 "luna": "res://dialog/characters/luna.dch",
+"mysterious_user": "res://dialog/characters/mysterious_user.dch",
 "qubit": "res://dialog/characters/qubit.dch"
 }
 directories/dtl_directory={
@@ -45,7 +52,7 @@ layout/style_directory={
 layout/style_list=["res://dialog/styles/dialog_style.tres"]
 layout/default_style="res://dialog/styles/dialog_style.tres"
 extensions_folder="res://addons/dialogic_additions"
-text/letter_speed=0.09
+text/letter_speed=0.04
 text/initial_text_reveal_skippable=true
 text/text_reveal_skip_delay=0.1
 text/advance_delay=0.1

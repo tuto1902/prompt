@@ -11,5 +11,5 @@ script = ExtResource("1_j7un0")
 position = Vector2(0, -16)
 texture = ExtResource("2_j7un0")
 hframes = 14
-vframes = 5
+vframes = 8
 frame = 43

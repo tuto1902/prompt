@@ -5,13 +5,25 @@ class_name PlayerStateIdle extends PlayerState
 @onready var jump: PlayerStateJump = %Jump
 @onready var up_dash: PlayerStateUpDash = %UpDash
 
+var idle_timer
+var apple_eaten: bool = false
+
 
 func enter() -> void:
 	player.jump_count = 0
+	idle_timer = randi_range(30, 60)
 	#if player.previous_state == run:
 		#player.animation_player.play("run_to_idle")
 		#player.animation_player.animation_finished.connect(_on_animation_finished)
 		#return
+	player.animation_player.play("idle")
+
+
+func eat_apple() -> void:
+	player.animation_player.play("idle_apple")
+
+
+func play_idle_animation() -> void:
 	player.animation_player.play("idle")
 
 
@@ -41,8 +53,14 @@ func handle_input(event: InputEvent) -> PlayerState:
 
 func process(_delta: float) -> PlayerState:
 	player.update_direction()
+	if idle_timer > 0:
+		idle_timer =- _delta
 	if player.direction != 0:
 		return run
+	if idle_timer <= 0 and not apple_eaten:
+		apple_eaten = true
+		eat_apple()
+		
 	return self
 
 

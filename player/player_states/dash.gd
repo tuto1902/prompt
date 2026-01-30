@@ -49,7 +49,7 @@ func physics_process(_delta: float) -> PlayerState:
 	player.velocity.y = 0
 	
 	if player.is_on_wall_only():
-		if player.abilities["wall jump"]:
+		if player.abilities[Enums.ABILITIES.WALL_JUMP]:
 			return wall_slide
 	
 	if player.is_on_wall():
