@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7q60wi4f8ofo" path="res://levels/terminals/terminal.gd" id="1_voj8e"]
 [ext_resource type="Texture2D" uid="uid://cmxyxfsf4mccg" path="res://assets/terminal_pink.png" id="1_w87kw"]
-[ext_resource type="AudioStream" uid="uid://bkl23l2dayu5e" path="res://assets/sfx/picking up item.wav" id="2_e34wc"]
+[ext_resource type="AudioStream" uid="uid://ddmncar7w8bwr" path="res://assets/sfx/getting order sound.wav" id="2_toxb7"]
 [ext_resource type="PackedScene" uid="uid://drqcvrd6x5tkm" path="res://input_hint/input_hint.tscn" id="3_2mgg8"]
 
 [sub_resource type="Animation" id="Animation_2mgg8"]
@@ -66,8 +66,7 @@ size = Vector2(32, 33)
 
 [node name="TerminalPink" type="Node2D"]
 script = ExtResource("1_voj8e")
-prompt_pickup_scene = "uid://cr3rwf4iek5as"
-pickup_sound = ExtResource("2_e34wc")
+pickup_sound = ExtResource("2_toxb7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)

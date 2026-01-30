@@ -6,6 +6,7 @@
 script = ExtResource("1_u8000")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 bus = &"Music"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]

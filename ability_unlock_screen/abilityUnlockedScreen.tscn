@@ -1,0 +1,414 @@
+[gd_scene load_steps=11 format=3 uid="uid://1htvmn13i622"]
+
+[ext_resource type="Texture2D" uid="uid://bmd6vg7puboe0" path="res://assets/controls_tilemap_packed.png" id="1_ag0j4"]
+[ext_resource type="Script" uid="uid://denqnlfmfvxv2" path="res://ability_unlock_screen/ability_unlocked_screen.gd" id="1_gfu8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfu8o"]
+atlas = ExtResource("1_ag0j4")
+region = Rect2(320, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbbsv"]
+atlas = ExtResource("1_ag0j4")
+region = Rect2(320, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm6ni"]
+atlas = ExtResource("1_ag0j4")
+region = Rect2(320, 272, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je7t0"]
+atlas = ExtResource("1_ag0j4")
+region = Rect2(320, 272, 16, 16)
+
+[sub_resource type="Animation" id="Animation_gfu8o"]
+resource_name = "show_hint"
+length = 0.60000336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 0.21022424),
+"update": 0,
+"values": [Vector2(0, 180), Vector2(0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/MarginContainer/Panel/ContinueButton")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"grab_focus"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/MarginContainer/Panel/ContinueButton:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_nbbsv"]
+resource_name = "hide_hint"
+length = 0.60000336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.60000336),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 180)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/MarginContainer/Panel/ContinueButton:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_tm6ni"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 180)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/MarginContainer/Panel/ContinueButton:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_je7t0"]
+_data = {
+&"RESET": SubResource("Animation_tm6ni"),
+&"hide_hint": SubResource("Animation_nbbsv"),
+&"show_hint": SubResource("Animation_gfu8o")
+}
+
+[node name="AbilityUnlockedScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 25
+script = ExtResource("1_gfu8o")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 180.0
+offset_bottom = 179.99933
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 28
+
+[node name="Panel" type="Panel" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/MarginContainer/Panel"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0.062635034, 0.047320396, 0.052438907, 1)
+
+[node name="Label" type="Label" parent="Control/MarginContainer/Panel/ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 19.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 10
+text = "ability unlocked"
+vertical_alignment = 1
+
+[node name="DoubleJump" type="Control" parent="Control/MarginContainer/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Panel/DoubleJump"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 11
+
+[node name="Label" type="Label" parent="Control/MarginContainer/Panel/DoubleJump/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.09858022, 0.0786339, 0.085299395, 1)
+theme_override_font_sizes/font_size = 10
+text = "double jump"
+horizontal_alignment = 1
+
+[node name="HboxContainer" type="HBoxContainer" parent="Control/MarginContainer/Panel/DoubleJump/VBoxContainer"]
+z_index = 50
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Verb" type="Label" parent="Control/MarginContainer/Panel/DoubleJump/VBoxContainer/HboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "press"
+
+[node name="JumpInput" type="TextureRect" parent="Control/MarginContainer/Panel/DoubleJump/VBoxContainer/HboxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_gfu8o")
+
+[node name="Hint" type="Label" parent="Control/MarginContainer/Panel/DoubleJump/VBoxContainer/HboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "In mid air"
+
+[node name="Dash" type="Control" parent="Control/MarginContainer/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Panel/Dash"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 11
+
+[node name="Label" type="Label" parent="Control/MarginContainer/Panel/Dash/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.09858022, 0.0786339, 0.085299395, 1)
+theme_override_font_sizes/font_size = 10
+text = "Dash"
+horizontal_alignment = 1
+
+[node name="HboxContainer" type="HBoxContainer" parent="Control/MarginContainer/Panel/Dash/VBoxContainer"]
+z_index = 50
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Verb" type="Label" parent="Control/MarginContainer/Panel/Dash/VBoxContainer/HboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "press"
+
+[node name="DashInput" type="TextureRect" parent="Control/MarginContainer/Panel/Dash/VBoxContainer/HboxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_nbbsv")
+
+[node name="Hint" type="Label" parent="Control/MarginContainer/Panel/Dash/VBoxContainer/HboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "to dash forward"
+
+[node name="WallJump" type="Control" parent="Control/MarginContainer/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Panel/WallJump"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 11
+
+[node name="Label" type="Label" parent="Control/MarginContainer/Panel/WallJump/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.09858022, 0.0786339, 0.085299395, 1)
+theme_override_font_sizes/font_size = 10
+text = "Wall jump"
+horizontal_alignment = 1
+
+[node name="HboxContainer" type="HBoxContainer" parent="Control/MarginContainer/Panel/WallJump/VBoxContainer"]
+z_index = 50
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Verb" type="Label" parent="Control/MarginContainer/Panel/WallJump/VBoxContainer/HboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "press"
+
+[node name="WallJumpInput" type="TextureRect" parent="Control/MarginContainer/Panel/WallJump/VBoxContainer/HboxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_tm6ni")
+
+[node name="Hint" type="Label" parent="Control/MarginContainer/Panel/WallJump/VBoxContainer/HboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "on a wall"
+
+[node name="UpDash" type="Control" parent="Control/MarginContainer/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/Panel/UpDash"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 11
+
+[node name="Label" type="Label" parent="Control/MarginContainer/Panel/UpDash/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0.09858022, 0.0786339, 0.085299395, 1)
+theme_override_font_sizes/font_size = 10
+text = "Upward dash"
+horizontal_alignment = 1
+
+[node name="HboxContainer" type="HBoxContainer" parent="Control/MarginContainer/Panel/UpDash/VBoxContainer"]
+z_index = 50
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Verb" type="Label" parent="Control/MarginContainer/Panel/UpDash/VBoxContainer/HboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "press"
+
+[node name="UpDashInput" type="TextureRect" parent="Control/MarginContainer/Panel/UpDash/VBoxContainer/HboxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_je7t0")
+
+[node name="Hint" type="Label" parent="Control/MarginContainer/Panel/UpDash/VBoxContainer/HboxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 5
+text = "on the ground"
+
+[node name="ContinueButton" type="Button" parent="Control/MarginContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -16.0
+offset_right = 4.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 5
+disabled = true
+text = "Continue"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_je7t0")
+}
