@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cyhhb83y3llyw"]
+[gd_scene load_steps=36 format=3 uid="uid://cyhhb83y3llyw"]
 
 [ext_resource type="Script" uid="uid://3yeymuabg5wp" path="res://player/player.gd" id="1_yw30f"]
 [ext_resource type="Texture2D" uid="uid://btoxkov1t74qq" path="res://assets/qubit_spritesheet.png" id="2_32hag"]
@@ -13,8 +13,10 @@
 [ext_resource type="Script" uid="uid://caw38gcbsdct" path="res://player/player_states/wall_jump.gd" id="8_8t03j"]
 [ext_resource type="AudioStream" uid="uid://cvpng64tjsug8" path="res://assets/sfx/jump (v2).wav" id="9_kb6p2"]
 [ext_resource type="Script" uid="uid://bs26yf1yr4alc" path="res://player/up_dash.gd" id="10_8t03j"]
+[ext_resource type="AudioStream" uid="uid://dhxb1mikimkwx" path="res://assets/sfx/dash.wav" id="13_32hag"]
 [ext_resource type="Script" uid="uid://dpqx4ptr6i3v3" path="res://player/dialog.gd" id="15_wodsf"]
 [ext_resource type="Script" uid="uid://kneiat4rn8q5" path="res://player/death.gd" id="16_32hag"]
+[ext_resource type="PackedScene" uid="uid://bf5xhsr4kj6ca" path="res://pause_menu/pause_menu.tscn" id="17_tqiix"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ebec5"]
 size = Vector2(10, 29)
@@ -131,6 +133,37 @@ tracks/0/keys = {
 "values": [98, 99, 100, 101, 102]
 }
 
+[sub_resource type="Animation" id="Animation_32hag"]
+resource_name = "idle_apple"
+length = 1.2500083
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Qbit:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25, 0.33333334, 0.4166667, 0.5, 0.5833334, 0.6666667, 0.75, 0.8333334, 0.9166667, 1, 1.0833334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerStates/Idle")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_idle_animation"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_g6k8r"]
 resource_name = "jump"
 length = 0.25000834
@@ -235,6 +268,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [42, 43]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerStates/UpDash")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_dash_sound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_8t03j"]
 resource_name = "wall_jump"
@@ -269,37 +316,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [14, 15, 16, 17]
-}
-
-[sub_resource type="Animation" id="Animation_32hag"]
-resource_name = "idle_apple"
-length = 1.2500083
-step = 0.083333336
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Qbit:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.083333336, 0.16666667, 0.25, 0.33333334, 0.4166667, 0.5, 0.5833334, 0.6666667, 0.75, 0.8333334, 0.9166667, 1, 1.0833334),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerStates/Idle")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1.25),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"play_idle_animation"
-}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgyib"]
@@ -430,10 +446,12 @@ script = ExtResource("8_8t03j")
 [node name="Dash" type="Node" parent="PlayerStates"]
 unique_name_in_owner = true
 script = ExtResource("7_boad6")
+dash_sound = ExtResource("13_32hag")
 
 [node name="UpDash" type="Node" parent="PlayerStates"]
 unique_name_in_owner = true
 script = ExtResource("10_8t03j")
+dash_sound = ExtResource("13_32hag")
 
 [node name="Dialog" type="Node" parent="PlayerStates"]
 unique_name_in_owner = true
@@ -444,4 +462,7 @@ unique_name_in_owner = true
 script = ExtResource("16_32hag")
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -8.0
 bus = &"SFX"
+
+[node name="PauseMenu" parent="." instance=ExtResource("17_tqiix")]

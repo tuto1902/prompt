@@ -22,7 +22,7 @@ MessageBus="*res://_global/message_bus.gd"
 GameManager="*res://_global/game_manager.gd"
 SaveManager="*res://_global/save_manager.gd"
 SceneManager="*res://_global/scene_manager.tscn"
-AbilityUnlockedScreen="*res://ability_unlock_screen/abilityUnlockedScreen.tscn"
+AbilityUnlockedScreen="*res://ability_unlock_screen/ability_unlocked_screen.tscn"
 Audio="*res://_global/audio.tscn"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
@@ -190,6 +190,12 @@ dialogic_default_action={
 debug={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":47,"key_label":0,"unicode":47,"location":0,"echo":false,"script":null)
+]
+}
+pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":6,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
 

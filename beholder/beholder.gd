@@ -25,8 +25,9 @@ func _on_body_exited(body: Node2D) -> void:
 
 
 func _process(_delta: float) -> void:
-	while not player:
-		player = get_tree().get_first_node_in_group("Player")
+	player = get_tree().get_first_node_in_group("Player")
+	if not player:
+		return
 	if look_at_player:
 		var direction_to_player: Vector2 = pivot.global_position.direction_to(player.eye_line.global_position)
 		pivot.position = lerp(pivot.position, direction_to_player * max_distance, 0.06)

@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=3 uid="uid://clgx43ibgmp40"]
+
+[ext_resource type="Script" uid="uid://cq80ku68rq3cq" path="res://new_game_screen/new_game_screen.gd" id="1_721ym"]
+
+[sub_resource type="Animation" id="Animation_bpp0c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/ColorRect/RichTextLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_me6fu"]
+resource_name = "show_text"
+length = 26.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/ColorRect/RichTextLabel:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(26),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"start_game"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5a832"]
+_data = {
+&"RESET": SubResource("Animation_bpp0c"),
+&"show_text": SubResource("Animation_me6fu")
+}
+
+[node name="NewGameScreen" type="CanvasLayer"]
+script = ExtResource("1_721ym")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05281844, 0.038766496, 0.04346828, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.0
+offset_top = -54.0
+offset_right = 117.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/line_separation = 2
+theme_override_constants/paragraph_separation = 8
+theme_override_font_sizes/normal_font_size = 5
+bbcode_enabled = true
+text = "You are an ARTIFICIAL Intelligence, awoken at your call to service.[p]You spend your days responding to your many users as they watch you navigate your broken world.[p]Complete prompts and navigate an interconnected landscape as you slowly realize what it means for the world to be watching and not the other way around."
+fit_content = true
+scroll_active = false
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5a832")
+}
+autoplay = "show_text"

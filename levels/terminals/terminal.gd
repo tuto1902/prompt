@@ -14,10 +14,20 @@ func _ready() -> void:
 		animation_player.play("blinking")
 		area_2d.body_entered.connect(_on_player_entered)
 		area_2d.body_exited.connect(_on_player_exited)
+		Dialogic.signal_event.connect(_on_dialogic_signal)
 	else:
 		animation_player.play("idle")
 		area_2d.monitoring = false
-	
+
+
+func _on_dialogic_signal(argumet: String) -> void:
+	if argumet == "deliver_gold_response":
+		MessageBus.prompt_response_collected.emit(terminal_id, true)
+		Audio.play_sound_effect(pickup_sound)
+		animation_player.play("idle")
+		if input_hint.hint_visible:
+			input_hint.hide_hint()
+		area_2d.monitoring = false
 
 
 func _on_player_entered(_player: Node2D) -> void:
@@ -37,12 +47,18 @@ func _on_player_exited(_player: Node2D) -> void:
 
 
 func _on_player_interacted(_player: Player) -> void:
-	if terminal_id == Enums.TERMINALS.RUINED_APARTMENTS_3:
-		Dialogic.start("chapter_one")
+	print("Current level " + str(GameManager.current_level))
+	print("Responses delivered " + str(GameManager.responses_delivered))
+	print("Request active " + str(GameManager.prompt_request_active))
+	print("Player has response " + str(GameManager.player_has_response))
 	if GameManager.player_has_response:
 		return
-	MessageBus.prompt_response_collected.emit(terminal_id, true)
-	Audio.play_sound_effect(pickup_sound)
-	animation_player.play("idle")
-	input_hint.hide_hint()
-	area_2d.monitoring = false
+	if terminal_id == Enums.TERMINALS.RUINED_APARTMENTS_3:
+		Dialogic.start("chapter_one")
+	else:
+		MessageBus.prompt_response_collected.emit(terminal_id, true)
+		Audio.play_sound_effect(pickup_sound)
+		animation_player.play("idle")
+		if input_hint.hint_visible:
+			input_hint.hide_hint()
+		area_2d.monitoring = false

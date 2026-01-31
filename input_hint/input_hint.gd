@@ -24,6 +24,7 @@ const HINT_MAP: Dictionary = {
 var controller_type: String = "keyboard"
 var current_hint: String = ""
 var current_verb: String = ""
+var hint_visible: bool = false
 
 @onready var verb_label: Label = %Verb
 @onready var input_texture: TextureRect = %Input
@@ -62,10 +63,12 @@ func show_hint() -> void:
 	hint_label.text = current_hint
 	update_input_texture()
 	animation_player.play("show_hint")
+	hint_visible = true
 
 
 func hide_hint() -> void:
 	animation_player.play("hide_hint")
+	hint_visible = false
 
 
 func get_controller_type(device_id: int) -> String:

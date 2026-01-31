@@ -118,6 +118,8 @@ func _on_dialogic_signal(argumet: String) -> void:
 		return
 	if argumet == "dialog_ended":
 		transition_to_state(idle)
+	if argumet == "game_over":
+		global_position = Vector2(71.0, 160.0)
 
 
 func _on_ability_unlocked(ability: Enums.ABILITIES) -> void:
@@ -134,6 +136,8 @@ func _on_ability_locked(ability: Enums.ABILITIES) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		MessageBus.game_paused.emit()
 	if event.is_action_pressed("interact") and current_state != dialog:
 		MessageBus.player_interacted.emit(self)
 		get_viewport().set_input_as_handled()
