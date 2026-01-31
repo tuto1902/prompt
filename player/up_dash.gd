@@ -2,6 +2,8 @@ class_name PlayerStateUpDash extends PlayerState
 
 const dash_visual_spawn_interval: float = 0.02
 
+@export var dash_sound: AudioStream
+
 @onready var idle: PlayerStateIdle = %Idle
 @onready var wall_slide: PlayerStateWallSlide = %WallSlide
 @onready var fall: PlayerStateFall = %Fall
@@ -15,7 +17,7 @@ var dashing: bool
 
 
 func enter() -> void:
-	#dash_speed = player.speed * 0.08
+	player.sfx_player.stream = dash_sound
 	dashing = false
 	dash_timer = player.up_dash_time
 	visual_spawn_timer = 0.0
@@ -27,6 +29,13 @@ func exit() -> void:
 	dash_timer = 0.0
 	dashing = false
 	player.dash_cooldown.start(player.dash_cooldown_time)
+
+
+func play_dash_sound() -> void:
+	randomize()
+	var pitch_scale = randf_range(0.8, 1.2)
+	player.sfx_player.pitch_scale = pitch_scale
+	player.sfx_player.play()
 
 
 func process(delta: float) -> PlayerState:

@@ -9,7 +9,13 @@ var save_data: Dictionary = {}
 
 
 func _ready() -> void:
-	pass
+	Dialogic.signal_event.connect(_on_dialogic_signal)
+
+
+func _on_dialogic_signal(argumet: String) -> void:
+	if argumet == "game_over":
+		if FileAccess.file_exists(get_file_name(current_slot)):
+			DirAccess.remove_absolute(get_file_name(current_slot))
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -72,8 +78,10 @@ func setup_game() -> void:
 	GameManager.responses_delivered = save_data.get("responses_delivered", 0)
 	
 	if pickup_terminals:
+		#GameManager.pickup_terminals.clear()
 		for i in pickup_terminals.size():
 			GameManager.pickup_terminals[i] = pickup_terminals[i]
+		GameManager.pickup_terminals.sort()
 	if doors:
 		for i in doors.size():
 			GameManager.doors[i] = doors[i]

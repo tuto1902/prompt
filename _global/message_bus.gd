@@ -7,9 +7,6 @@ signal player_ready
 signal player_interacted(player: Player)
 
 @warning_ignore("unused_signal")
-signal player_healed(amount: float)
-
-@warning_ignore("unused_signal")
 signal player_died()
 
 @warning_ignore("unused_signal")

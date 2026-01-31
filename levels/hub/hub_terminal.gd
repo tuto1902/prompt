@@ -34,7 +34,8 @@ func _on_player_entered(_player: Node2D) -> void:
 func _on_player_exited(_player: Node2D) -> void:
 	MessageBus.player_interacted.disconnect(_on_player_interacted)
 	MessageBus.input_hint_changed.disconnect(input_hint._on_input_hint_changed)
-	input_hint.hide_hint()
+	if input_hint.hint_visible:
+		input_hint.hide_hint()
 
 
 func _on_prompt_response_delivered() -> void:
@@ -42,7 +43,10 @@ func _on_prompt_response_delivered() -> void:
 
 
 func _on_player_interacted(_player: Player) -> void:
-	input_hint.hide_hint()
+	if GameManager.prompt_request_active and not GameManager.player_has_response:
+		return
+	if input_hint.hint_visible:	
+		input_hint.hide_hint()
 	player_interacted = true
 	print("Current level " + str(GameManager.current_level))
 	print("Responses delivered " + str(GameManager.responses_delivered))

@@ -2,6 +2,8 @@ class_name PlayerStateDash extends PlayerState
 
 const dash_visual_spawn_interval: float = 0.03
 
+@export var dash_sound: AudioStream
+
 @onready var idle: PlayerStateIdle = %Idle
 @onready var wall_slide: PlayerStateWallSlide = %WallSlide
 @onready var fall: PlayerStateFall = %Fall
@@ -13,6 +15,8 @@ var visual_spawn_timer: float
 var dash_speed
 
 func enter() -> void:
+	player.sfx_player.stream = dash_sound
+	play_dash_sound()
 	player.animation_player.play("dash")
 	dash_speed = player.speed * player.dash_speed_multiplier
 	dash_timer = player.dash_time
@@ -42,6 +46,13 @@ func process(delta: float) -> PlayerState:
 		get_tree().root.add_child(dash_visual)
 	
 	return self
+
+
+func play_dash_sound() -> void:
+	randomize()
+	var pitch_scale = randf_range(0.8, 1.2)
+	player.sfx_player.pitch_scale = pitch_scale
+	player.sfx_player.play()
 
 
 func physics_process(_delta: float) -> PlayerState:

@@ -2,26 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bqmfi0fj48x8y" path="res://levels/hub/hub_terminal.gd" id="1_71xa5"]
 [ext_resource type="PackedScene" uid="uid://drqcvrd6x5tkm" path="res://input_hint/input_hint.tscn" id="2_lvh7s"]
-[ext_resource type="AudioStream" uid="uid://b0yhptj0xmufx" path="res://assets/sfx/correct item (funky).wav" id="2_od6wh"]
+[ext_resource type="AudioStream" uid="uid://df715htvxdgcc" path="res://assets/sfx/getting order sound (higher pitch).wav" id="2_od6wh"]
 [ext_resource type="Texture2D" uid="uid://dvu6iuets04bb" path="res://assets/hub_terminal.png" id="3_od6wh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_od6wh"]
 size = Vector2(32, 33)
-
-[sub_resource type="Animation" id="Animation_od6wh"]
-resource_name = "disabled"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
 
 [sub_resource type="Animation" id="Animation_yiv2q"]
 length = 0.001
@@ -53,6 +38,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_od6wh"]
+resource_name = "disabled"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ea26x"]

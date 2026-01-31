@@ -5,7 +5,7 @@
 
 [sub_resource type="Gradient" id="Gradient_xuqc6"]
 offsets = PackedFloat32Array(0.5, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.20784314, 0.19215687, 0.24313726, 0)
+colors = PackedColorArray(0.050980393, 0.039215688, 0.043137256, 1, 0.050980393, 0.039215688, 0.043137256, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_g5hnt"]
 gradient = SubResource("Gradient_xuqc6")
@@ -17,6 +17,7 @@ fill_to = Vector2(1, 0.5)
 metadata/_snap_enabled = true
 
 [node name="SceneManager" type="CanvasLayer"]
+process_mode = 3
 layer = 100
 script = ExtResource("1_ks4je")
 

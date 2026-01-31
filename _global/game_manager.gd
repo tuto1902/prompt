@@ -25,9 +25,6 @@ var pickup_terminals: Dictionary = {
 	Enums.TERMINALS.STAION_Z: {
 		"enabled": false,
 	},
-	Enums.TERMINALS.UNFINISHED_APARTMENTS_1: {
-		"enabled": false,
-	},
 	Enums.TERMINALS.RUINED_APARTMENTS_1: {
 		"enabled": false,
 	},
@@ -39,7 +36,10 @@ var pickup_terminals: Dictionary = {
 	},
 	Enums.TERMINALS.COLLAPSING_STATION_02: {
 		"enabled": false,
-	}
+	},
+	Enums.TERMINALS.UNFINISHED_APARTMENTS_1: {
+		"enabled": false,
+	},
 }
 
 var pickup_scene = "uid://cr3rwf4iek5as"

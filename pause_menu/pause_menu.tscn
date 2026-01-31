@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://cfsphjbwuxkcc" path="res://pause_menu/pause_menu.gd" id="1_5hbt6"]
 
 [node name="PauseMenu" type="CanvasLayer"]
-layer = 50
+process_mode = 3
+layer = 100
+visible = false
 script = ExtResource("1_5hbt6")
 
 [node name="Control" type="Control" parent="."]
@@ -21,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.027492085, 0.018974131, 0.022161864, 0.49019608)
+color = Color(0.02745098, 0.019607844, 0.023529412, 0.7058824)
 
 [node name="ColorRect2" type="ColorRect" parent="Control"]
 custom_minimum_size = Vector2(0, 32)
@@ -33,18 +35,14 @@ color = Color(0.07661847, 0.059497863, 0.065219656, 1)
 
 [node name="Label" type="Label" parent="Control/ColorRect2"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = -16.0
-offset_bottom = 16.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 10
 text = "paused"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PauseScreen" type="Control" parent="Control"]
@@ -72,14 +70,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="Control/PauseScreen/SettingsMenu"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 15
-text = "Audio"
-horizontal_alignment = 1
-
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/PauseScreen/SettingsMenu"]
 layout_mode = 2
 
@@ -90,6 +80,7 @@ theme_override_font_sizes/font_size = 10
 text = "music"
 
 [node name="MusicVolume" type="HSlider" parent="Control/PauseScreen/SettingsMenu/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -106,6 +97,7 @@ theme_override_font_sizes/font_size = 10
 text = "sfx"
 
 [node name="SfxVolume" type="HSlider" parent="Control/PauseScreen/SettingsMenu/HBoxContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -130,20 +122,11 @@ size_flags_vertical = 4
 theme_override_font_sizes/font_size = 5
 text = "Quit Game"
 
-[node name="ResumeButton" type="Button" parent="Control/PauseScreen"]
+[node name="ResumeButton" type="Button" parent="Control/PauseScreen/SettingsMenu"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 0)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -52.0
-offset_top = -23.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_font_sizes/font_size = 5
 text = "Resume"
